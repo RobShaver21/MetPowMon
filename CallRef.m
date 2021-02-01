@@ -1,9 +1,8 @@
 clearvars; close all; clc;
-%% Properties
-
-cd (['C:\Users\' getenv('username') '\MATLAB Drive\MP']);
-addpath (genpath(pwd))
-load Settings.mat; % load DataBase.mat
+baseF= pwd;
+addpath(genpath(pwd));
+load Settings.mat;
+%% Settings
 
 ProfileId=4;
 
@@ -31,6 +30,6 @@ end
 Output=RefCalc(T,VarNames,Name);
 AllRef{1,ProfileId}{1,2}(end+1)=Output;
 
-cd(['C:\Users\' getenv('username') '\MATLAB Drive\MP'])
+cd(baseF)
 save Settings.mat AllRef DataProfile DataSource Mail VarNames
 
