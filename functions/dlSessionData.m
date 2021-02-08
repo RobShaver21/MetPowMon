@@ -54,8 +54,9 @@ for a=1:length(AllSessions)
             T=cell2table(sensor_data);
             T.Properties.VariableNames=sensor_name;
             
-            time=[0:seconds(0.1):seconds((height(T)-1)/10)]';
-            T.t=time;
+            t=[0:seconds(0.1):seconds((height(T)-1)/10)]';
+            T.t=t;
+            T.time=[];
             TT=table2timetable(T);
             
             Dout(ply).Daten=TT;
