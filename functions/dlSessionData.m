@@ -1,15 +1,16 @@
-function dlSessionData(AllSessions,player_id,teamurl,datarequest)
-
+function dlSessionData(AllSessions,players,teamurl,datarequest,DataF)
+%%
 failure = struct('player_id', {},'player_session_id', {},'session_id', {}, 'err', {});
 
 outvarnames={...
-        'Datum','ID','Nachname','Vorname','SpielerNr','Beginn','Ende',...
-        'Dauer','markers','Daten'
-        };
-    
+    'Datum','ID','Nachname','Vorname','SpielerNr','Beginn','Ende',...
+    'Dauer','markers','Daten'
+    };
+
 c=cell(size(outvarnames))';
-    
+%%
 for a=1:length(AllSessions)
+    %% GET session participants
     Dout=cell2struct(c,outvarnames);
     
     session_id=AllSessions(a).id;
@@ -18,7 +19,7 @@ for a=1:length(AllSessions)
     session_detail=send(datarequest,teamsessionurl);
     
     participants=session_detail.Body.Data.data.participants;
-        
+    
     datum=datetime(...
         session_detail.Body.Data.data.start_time,...
         'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss'...
@@ -32,7 +33,8 @@ for a=1:length(AllSessions)
             player_id=participants(ply).player_id;
             player_session_id=session_detail.Body.Data.data.participants(ply).player_session_id;
             %%  Extract sample-data
-            sampleurl=[teamurl 'training_sessions/' ...
+            sampleurl=[...
+                'https://teampro.api.polar.com/v1/training_sessions/' ...
                 player_session_id '/?samples=all'...
                 ];
             sampleresponse=send(datarequest, sampleurl);
@@ -53,7 +55,7 @@ for a=1:length(AllSessions)
             T.Properties.VariableNames=sensor_name;
             
             time=[0:seconds(0.1):seconds((height(T)-1)/10)]';
-            T.time=time;
+            T.t=time;
             TT=table2timetable(T);
             
             Dout(ply).Daten=TT;
@@ -72,6 +74,7 @@ for a=1:length(AllSessions)
                 sampleresponse.Body.Data.data.start_time,...
                 'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss'...
                 );
+            Dout(ply).Daten.clock=time+start_time;
             start_time.Format='HH:mm:ss';
             
             Dout(ply).Beginn=start_time;
@@ -95,12 +98,21 @@ for a=1:length(AllSessions)
         
     end
     
-    % Output
+    % save Output
     filename=[char(DataF) '\' datestr(datum,'yyyy_mm_dd_HH_MM_SS'),'.mat'];
     save (filename,'Dout');
     
 end
 
-errlabel=[char(DataF) '\error\Err_' datestr(now,'yyyy_mm_dd_HH_MM_SS') '.mat'];
+% save error log
+path=[char(DataF) '\error'];
+
+if ~isdir(path)
+    mkdir(path)
+end
+
+errlabel=[path '\Err_' datestr(now,'yyyy_mm_dd_HH_MM_SS') '.mat'];
+
 save(errlabel,'failure');
+
 end

@@ -6,16 +6,16 @@ aa=1; ab=1;
 %% Schleife Games/Ordner
 
 for aa=1:length(Y)
-    if SourceId==1      % Polar
+    if SourceId==1              % Polar
         cd(DataF)
         dataG=readgamedata(X,Y,aa,GameId);
         cd(Y{aa})
-        Z=dir('* *');  Z={Z.name};        % Z <- Spieler
+        Z=dir('* *'); Z={Z.name}; % Z <- Spieler
         games=split(Y{aa}, '_');
         Einheit=[games{1} '_' games{2}];
         GameF=pwd;
         
-    elseif SourceId==4      % Kinexxon
+    elseif SourceId==4          % Kinexxon
         Glog=Smatch==Y(aa);
         Z=STR(Glog);
         GameF=DataF;
@@ -25,6 +25,12 @@ for aa=1:length(Y)
         
         log=G.MatchID==str2num(str1);
         Gsub=G(log,:);
+        
+    elseif SourceId==3          % Polar API
+        load([Y(aa).folder '\' Y(aa).name])
+        Z=Dout;
+        Einheit=split(Y(aa).name,'.');
+        Einheit=Einheit{1};
     end
     
     %% Schleife Spieler
@@ -48,7 +54,7 @@ for aa=1:length(Y)
             data=AddGpx(data);
             cd(old);
             
-            [DataStruct]=cutdatafromgame(dataG,data,SourceId,Nr); % Daten schneiden anhand der Übersichtsdatei if id=1
+            [DataStruct]=cutdatafromgame(dataG,data,SourceId,Nr); 
             
         elseif SourceId==4      % Kinexxon
             playerO=(Splayer(Glog));
@@ -65,7 +71,16 @@ for aa=1:length(Y)
             log=strtrim(string(playerO{ab}))==string(Gsub.Name);
             Gplayer=Gsub(log,:);
             
-            [DataStruct]=cutdatafromgame(Gplayer,data,GameId,SourceId,Nr); % Daten schneiden anhand der Übersichtsdatei if id=1
+            [DataStruct]=cutdatafromgame(Gplayer,data,SourceId,Nr); 
+            
+        elseif SourceId==3          % Polar API
+            Vorname=Z(ab).Vorname;
+            Nachname=Z(ab).Nachname;
+            Nr=Z(ab).SpielerNr;
+            [Norm, pos]=newplayer(Nr,Norm,Vorname,Nachname,SourceId)
+            data=Z(ab).Daten;
+            data=convertdata(data,varset,SourceId);
+            [DataStruct]=cutdatafromgame(dataG,data,SourceId,Nr); 
             
         end
         %% Calculation
@@ -79,7 +94,7 @@ for aa=1:length(Y)
         for am=1:length(DataStruct)
             DataS=DataStruct(am);
             try
-                [Features, Vecs]=FeatureCalc(DataS,Str,Norm,Field,ts,pos,0);  % NaNs in Rohdaten.
+                [Features, Vecs]=FeatureCalc(DataS,Str,Norm,Fields,ts,pos,0);
                 if am==1 && ab==1
                     Export=Features;
                     SprintExp=Vecs;
@@ -87,7 +102,8 @@ for aa=1:length(Y)
                     Export=[Export;Features];
                     SprintExp=[SprintExp;Vecs];
                 end
-            catch end
+            catch
+            end
         end
         
         %% display progress

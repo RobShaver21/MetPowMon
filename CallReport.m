@@ -1,8 +1,8 @@
 clearvars; close all; clc;
 
 %% Settings
-
-ProfileId=4;        % 1=VFL 2=Hockey 3=EHF 4=HoNaMa
+% 1=VFL 2=Hockey 3=EHF 4=HoNaMa 5=API_HoNaMa 6=API_Dana 7=API_DanaU21 8=API_eagle
+ProfileId=4;  
 
 loadSettings()
 

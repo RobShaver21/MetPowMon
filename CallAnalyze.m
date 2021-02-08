@@ -1,8 +1,8 @@
 clearvars; close all; clc;
 
 %% Settings
-
-ProfileId=4;        % 1=VFL 2=Hockey 3=EHF 4=HoNaMa
+% 1=VFL 2=Hockey 3=EHF 4=HoNaMa 5=API_HoNaMa 6=API_Dana 7=API_DanaU21 8=API_Eagle
+ProfileId=6;        
 
 loadSettings()
 
@@ -41,6 +41,8 @@ elseif SourceId==4      % Kinexxon
     Splayer=extractBetween(STR,'player=','.csv')';
     Y=unique(Smatch);
     
+elseif SourceId==3      % Polar API
+    Y=dir('*.mat');
 end
 %% pick Sessions
 Sessions=[1:5];
@@ -56,3 +58,7 @@ analyzeGames()
 
 %% Export
 exportTables()
+
+%% save Norm
+cd(baseF)
+save Settings.mat AllRef DataProfile DataSource Mail VarNames Fields
