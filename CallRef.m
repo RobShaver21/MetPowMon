@@ -1,13 +1,10 @@
 clearvars; close all; clc;
-baseF= pwd;
-addpath(genpath(pwd));
-load Settings.mat;
+
 %% Settings
 
-ProfileId=4;
+ProfileId=4;        % 1=VFL 2=Hockey 3=EHF 4=HoNaMa
 
-[RootF,DataF,varset,GameId,SourceId,RefId,PInd,ts,tsg]=...
-    profileset(DataProfile,DataSource,ProfileId);
+loadSettings()
 
 cd(RootF)
 cd('DataBase')
@@ -31,5 +28,5 @@ Output=RefCalc(T,VarNames,Name);
 AllRef{1,ProfileId}{1,2}(end+1)=Output;
 
 cd(baseF)
-save Settings.mat AllRef DataProfile DataSource Mail VarNames
 
+save Settings.mat AllRef DataProfile DataSource Mail VarNames Fields

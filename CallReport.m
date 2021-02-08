@@ -1,12 +1,10 @@
 clearvars; close all; clc;
-baseF= pwd;
-addpath(genpath(pwd));
-load Settings.mat;
-%% Settings
-ProfileId=4;
 
-[RootF,DataF,varset,GameId,SourceId,RefId,PInd,ts,tsg]=...
-    profileset(DataProfile,DataSource,ProfileId);
+%% Settings
+
+ProfileId=4;        % 1=VFL 2=Hockey 3=EHF 4=HoNaMa
+
+loadSettings()
 
 Ref=AllRef{1,ProfileId}{1,2}(4);
 
