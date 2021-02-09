@@ -45,7 +45,7 @@ elseif SourceId==3      % Polar API
     Y=dir('*.mat');
 end
 %% pick Sessions
-Sessions=[1:5];
+Sessions=[1];
 if SourceId==1
     X=X(Sessions);
     Y=Y(Sessions);

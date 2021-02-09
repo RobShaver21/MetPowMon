@@ -52,11 +52,13 @@ if SourceId==1
             DataStruct(a).AddDataRows.Properties.VariableNames=NewName;
         end
     end
-    
-end
 
+%%
+elseif SourceId==3
+    
+    
 %% Kinexon
-if SourceId==4
+elseif SourceId==4
     % dataG=Gplayer;      % remove later
     NewName=dataG.Properties.VariableNames;
     

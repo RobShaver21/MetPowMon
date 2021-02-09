@@ -90,6 +90,8 @@ for a=1:length(AllSessions)
             Dout(ply).Dauer=end_time-start_time;
             Dout(ply).markers=session_detail.Body.Data.data.markers;
             
+            % add Polar Data 
+            % GET /v1/teams/training_sessions/{training_session_id}
         catch ME
             failure(end + 1).player_id = player_id;
             failure(end).player_session__id = player_session_id;

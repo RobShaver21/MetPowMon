@@ -65,8 +65,8 @@ end
 
 %% Pick sessions
 
-Pick=[1:5];
-AllSessions=AllSessions(Pick);
+% Pick=[1:5];
+% AllSessions=AllSessions(Pick);
 
 % ind=strcmp(AllSessions.type,'TRAINING');
 % AllSessions=AllSessions(ind);
