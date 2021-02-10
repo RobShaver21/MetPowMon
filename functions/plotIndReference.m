@@ -25,11 +25,11 @@ if height(Zind)>0
 
     if ~isnan(Z(1,1))
         p=bar(Z);
-        title(gca,'Vergleich zur Referenz');
+        title(gca,'Vergleich Team / Individuell');
         yline(0.3,':r')
         yline(-0.3,':r')
         % legend('Individueller Längsschnitt','Querschnitt zum Team','Location','north');
-        legend([p(1) p(2)],'Individueller Längsschnitt','Querschnitt zum Team','Location','north','FontSize',6)
+        legend([p(1) p(2)],'Individuell','Team','Location','north','FontSize',6)
     else
         p=bar(Zindteam{:,:});
         %p=bar(Z{:,:})
@@ -47,7 +47,7 @@ else
     set(gca,'xticklabel',Zindteam.Properties.VariableNames,'FontSize',8);
 end
 
-        ylabel('Differenz in std zum Durchschnitt','FontSize',8);
+        ylabel('Differenz [SD] zum Durchschnitt','FontSize',8);
         set(gca,'xticklabel',Zindteam.Properties.VariableNames,'FontSize',8);
         ax = gca;
         xtickangle(45);

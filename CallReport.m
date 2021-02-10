@@ -2,25 +2,32 @@ clearvars; close all; clc;
 
 %% Settings
 % 1=VFL 2=Hockey 3=EHF 4=HoNaMa 5=API_HoNaMa 6=API_Dana 7=API_DanaU21 8=API_eagle
-ProfileId=4;  
+ProfileId=4;
 
 loadSettings()
 
-Ref=AllRef{1,ProfileId}{1,2}(4);
+Ref=AllRef(ProfileId).Ref(4);
 
-cd(RootF)
-cd('DataBase')
+DB=[char(RootF) '\DataBase'];
+cd(DB)
+
 allFiles = dir('*.mat');
 allNames = { allFiles.name };
 
-Session=17;
-
+%% pick Session
+pick=(8:length(allNames));
+allNames=allNames(pick);
+mode=2;         % Training
 %% Create Reports
+Session=1;
 for Session=1:numel(allNames)
-    cd(RootF)
-    cd('DataBase')
+    
+    cd(DB)
     Datafile=char(allNames(Session));
     Struct=load(Datafile);
-    CreateReport(Struct,VarNames,Ref,RootF, 2);
+    cd(baseF)
+    
+    CreateReport(Struct,VarNames,Ref,RootF,mode);
+       
     fprintf('%d ', Session);
 end

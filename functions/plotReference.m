@@ -12,10 +12,10 @@ RefPlot=figure;
 %RefPlot=figure;
 p=bar(Z{:,:});
 %p=bar(Z{:,:})
-    title(gca,'Vergleich zur Referenz');
+    title(gca,'Längsschnittvergleich');
     set(gca,'xticklabel',Z.Properties.VariableNames,'FontSize',8);
     xtickangle(45);
-    ylabel('Differenz in std zum Durchschnitt','FontSize',8);
+    ylabel('Differenz [SD] zum Durchschnitt','FontSize',8);
     ax = gca;
     ax.YGrid = 'on';
     %set(gca,'YTick',[-30:10:30]);

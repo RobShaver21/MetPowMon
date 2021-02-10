@@ -6,7 +6,6 @@ Einheit=Struct.SaveStruct.Einheit;
 Einheit=datetime(Einheit,'InputFormat','yyyyMMdd_HHmmss');
 H=timeofday(Einheit);
 
-
 str=string({Vector.Phase}');
 log=strcmp(str,"Gesamte Einheit");
 NewSprintExp=Vector(log,:);
@@ -21,13 +20,12 @@ Nachname=CellSprint(3,:);
 M=CellSprint(5,:);
 [mX,mY]=sprintscatter(M,0);
 
-
-img=figure ;%('visible','on');
+img=figure; % ('visible','on');
 hold on
+
 %% Scatter ID=1
 if ID==1
-    
-    
+
     xlim([0 S]);
     ylim([-length(LfdNr)-1 2]);
     
@@ -48,9 +46,8 @@ if ID==1
     set(gca,'XTick', 0:5*600:S,'xticklabel',xLabel)
     xlabel('Zeit [min]')
     
-end
 %% Heat ID=2
-if ID==2
+elseif ID==2
     
     for a=1:length(NewSprintExp)
         heat=NewSprintExp(a).VO2t;
@@ -78,16 +75,10 @@ if ID==2
     colorbar
     colormap(parula);
     
-end
+%% combined plot
 
-%%
+elseif ID==3
 
-if ID==3
-    
-    
-    img=figure;% ('visible','on');
-    hold on
-    
     xlim([0 S]);
     ylim([-length(LfdNr)-1 1]);
     
