@@ -2,7 +2,7 @@ clearvars; close all; clc;
 
 %% Settings
 % 1=VFL 2=Hockey 3=EHF 4=HoNaMa 5=API_HoNaMa 6=API_Dana 7=API_DanaU21 8=API_Eagle
-ProfileId=6;        
+ProfileId=4;        
 
 loadSettings()
 
@@ -26,7 +26,6 @@ if SourceId==1      % Polar Download
     X=dir('*.xls'); X={X.name};              % X <- Übersichtsdateien
     Y=dir('*'); Y=Y([Y.isdir]); Y={Y.name};  % Y <- Ordner der Spiele
     Y=Y(strlength(Y)>2);
-    FolderStruct=struct(X,Y);
     
 elseif SourceId==4      % Kinexxon
     cd(RootF);  G=readtable('Phase.csv'); cd(DataF);     % read Table for cutting data
@@ -45,7 +44,7 @@ elseif SourceId==3      % Polar API
     Y=dir('*.mat');
 end
 %% pick Sessions
-Sessions=[1];
+Sessions=[17];
 if SourceId==1
     X=X(Sessions);
     Y=Y(Sessions);
@@ -61,4 +60,9 @@ exportTables()
 
 %% save Norm
 cd(baseF)
+
+if ~isnan(RefId)
+    AllRef(ProfileId).Norm=Norm;
+end
+
 save Settings.mat AllRef DataProfile DataSource Mail VarNames Fields

@@ -9,9 +9,9 @@ x2=date;
 img=figure;%('visible','on');
 hold on
 
-scatter(x,y,'db','filled')
+scatter(x,y,'db','filled','LineWidth',3)
 plot(x,y,'b','LineWidth',1)
-scatter(x2,y2,'dr','filled')
+scatter(x2,y2,'dr','filled','LineWidth',3)
 ax = gca;
 ax.XGrid = 'on';
 

@@ -17,6 +17,7 @@ import mlreportgen.report.*; import mlreportgen.dom.*;
 
 %% Import Data, extract relevant Data
 
+
 TableImp=Struct.SaveStruct.Table;
 Vector=Struct.SaveStruct.VectorExport;
 Einheit=Struct.SaveStruct.Einheit;
@@ -34,7 +35,7 @@ RefC=Ref;
 %% Properties and PreTable
 
 %Variable selection
-select=[8 5 11 13 14 17 18 30]; %Vars from VarNames
+select=[8 5 11 13 14 17 18 30 56]; %Vars from VarNames
 pselect=[14 17];
 progselect=[13 14 17 18];
 strnr=3;
@@ -415,9 +416,6 @@ for a=1:length(Nachname)
     VO2indv=plotimplement(3,Paths.Ind(a).VO2);
     add(indv_plots,VO2indv);
     catch
-    end
-    if mode == 2
-        add(indv_plots,Refbarind);
     end
     
     for p=1:length(pos)

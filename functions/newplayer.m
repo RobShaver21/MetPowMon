@@ -9,10 +9,8 @@ if SourceId==1
         Norm.Nachname(l)=Nachname;
         Norm.Vorname(l)=Vorname;
         Norm.Gewicht(l)=nanmean(Norm.Gewicht);
-        Norm.MP4(l)=nanmean(Norm.MP4);
         Norm.EC0(l)=nanmean(Norm.EC0);
-        Norm.info(l)=['Die Werte von Spieler*in '  Vorname ' ' Nachname...
-            ' wurden anhand der Mittelwerte der anderen Spieler*innen berechnet'];
+        Norm.info(l)="Mittlelwerte des Teams";
     end
 
     pos=find(Norm{:,2}==Nr);
@@ -29,8 +27,7 @@ elseif SourceId==4
         Norm.Gewicht(l)=nanmean(Norm.Gewicht);
         Norm.MP4(l)=nanmean(Norm.MP4);
         Norm.EC0(l)=nanmean(Norm.EC0);
-        Norm.info(l)=['Die Werte von Spieler*in '  Vorname ' ' Nachname...
-            ' wurden anhand der Mittelwerte der anderen Spieler*innen berechnet'];
+        Norm.info(l)="Mittlelwerte des Teams";
     end
     
     log=[Vorname Nachname]==strcat(Norm.Vorname, Norm.Nachname);
@@ -47,8 +44,7 @@ elseif SourceId==3
         Norm.Gewicht(l)=nanmean(Norm.Gewicht);
         Norm.MP4(l)=nanmean(Norm.MP4);
         Norm.EC0(l)=nanmean(Norm.EC0);
-        Norm.info(l)=['Die Werte von Spieler*in '  Vorname ' ' Nachname...
-            ' wurden anhand der Mittelwerte der anderen Spieler*innen berechnet'];
+        Norm.info(l)="Mittlelwerte des Teams";
     end
     pos=find(Norm{:,2}==Nr); 
 end

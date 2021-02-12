@@ -10,7 +10,7 @@ str=string({Vector.Phase}');
 log=strcmp(str,"Gesamte Einheit");
 NewSprintExp=Vector(log,:);
 
-S=max([length(NewSprintExp(1).Zeit) length(NewSprintExp(2).Zeit)]);
+S=max([length(NewSprintExp(1).Table.t) length(NewSprintExp(2).Table.t)]);
 xLabel=0:5:S/600;
 
 CellSprint=struct2cell(NewSprintExp);
@@ -20,7 +20,7 @@ Nachname=CellSprint(3,:);
 M=CellSprint(5,:);
 [mX,mY]=sprintscatter(M,0);
 
-img=figure; % ('visible','on');
+img=figure;% ('visible','on');
 hold on
 
 %% Scatter ID=1
@@ -50,7 +50,7 @@ if ID==1
 elseif ID==2
     
     for a=1:length(NewSprintExp)
-        heat=NewSprintExp(a).VO2t;
+        heat=NewSprintExp(a).Table.VO2Tn;
         % MP=NewSprintExp(a).MP;
         x=1:length(heat);
         y=zeros(size(x)) - a;
@@ -84,11 +84,11 @@ elseif ID==3
     
     % VO2
     for a=1:length(NewSprintExp)
-        heat=NewSprintExp(a).VO2t;
+        heat=NewSprintExp(a).Table.VO2Tn;
         
-        d=NewSprintExp(a).Uhr(1);
-        d=datetime(d,'InputFormat','HH:mm:ss.SSS');
-        d=timeofday(d);
+        d=NewSprintExp(a).Table.clock(1);
+%         d=datetime(d,'InputFormat','HH:mm:ss.SSS');
+%         d=timeofday(d);
         d=seconds(H-d)*10;
         x=1:length(heat);
         x=x+d;
@@ -98,19 +98,24 @@ elseif ID==3
         col=heat';
         
         surface([x;x],[y;y],[z;z],[col;col],...
-            'facecol','no','edgecol','interp','linew',17);
+            'facecol','no','edgecol','interp','linew',11);
+        
+        Sx=M{a};
+        Sx=Sx+d;
+        Sy=(zeros(size(Sx))+a)*(-1);
+        scatter(Sx,Sy,'k<')
     end
     
     % N-highVO2
     
     I=1:length(NewSprintExp);
     N = 5;
-    m = arrayfun(@(x) numel(NewSprintExp(x).VO2t), I );
+    m = arrayfun(@(x) numel(NewSprintExp(x).Table.VO2Tn), I );
     m = max(m);
     FillNan= @(x,m) vertcat(x,nan(m-length(x),1));
     
     VO2mat=arrayfun(@(x) ...
-        FillNan(NewSprintExp(x).VO2t,m),...
+        FillNan(NewSprintExp(x).Table.VO2Tn,m),...
         I,'UniformOutput',false );
     VO2mat=[VO2mat{:}];
     VO2mat(isnan(VO2mat)) = 0;
@@ -132,11 +137,12 @@ elseif ID==3
     
     mY=[mY; zeros(length(mX),1)];
     mX=[mX; mX];
+    mX=mX;
     
     yLabel={'';'Gesamt'};
     yLabel=flip([yLabel; Nachname']);
     
-    scatter(mX,mY,'k<')
+    % scatter(mX,mY,'k<')
     
     % axes
     set(gca,'YTick', -length(LfdNr):2)

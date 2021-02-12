@@ -94,7 +94,7 @@ for aa=1:length(Y)
         for am=1:length(DataStruct)
             DataS=DataStruct(am);
             try
-                [Features, Vecs]=FeatureCalc(DataS,Str,Norm,Fields,ts,pos,0);
+                [Features, Vecs]=FeatureCalc(DataS,Str,Norm,Fields,ts,pos);
                 if am==1 && ab==1
                     Export=Features;
                     SprintExp=Vecs;

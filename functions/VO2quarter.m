@@ -1,7 +1,8 @@
 function [img]=VO2quarter(Vector,MP4,Einheit)
 
-% Vector=Struct.VectorExport; % already defined in main script
-
+% Vector=VO2ind;
+% MP4=indv_plot_table.VO4;
+ 
 ts=0.1;     %ts input definieren
 MP4=MP4(1);
 % convert Phase to string
@@ -30,11 +31,11 @@ if length(NewVector)>3
     for i=1:4
         try
             nexttile
-            t=[ts:ts:(length(IndVector(i).VO2t)*ts)]';
-            plot(t, IndVector(i).VO2t);
+            t=[ts:ts:(length(IndVector(i).Table.VO2Tn)*ts)]';
+            plot(t, IndVector(i).Table.VO2Tn);
             MP4label=sprintfc('%5.1f',MP4);
             yline(MP4,'--r',['MP4' MP4label],'LabelVerticalAlignment','middle');
-            mw=nanmean(IndVector(i).VO2t);
+            mw=nanmean(IndVector(i).Table.VO2Tn);
             mwlabel=sprintfc('%5.1f',mw);
             yline(mw,'--b',['MW' mwlabel],'LabelVerticalAlignment','middle');
             nrstr=num2str(i);
@@ -52,14 +53,14 @@ else
     str=string({Vector.Phase}');
     log=strcmp(str,"Gesamte Einheit");
     Vector=Vector(log,:);
-    v=Vector.VO2t;
+    v=Vector.Table.VO2Tn;
 
     Einheit=datetime(Einheit,'InputFormat','yyyyMMdd_HHmmss');
     H=timeofday(Einheit);
     
-    d=Vector.Uhr(1);
-    d=datetime(d,'InputFormat','HH:mm:ss.SSS');
-    d=timeofday(d);
+    d=Vector.Table.clock(1);
+%     d=datetime(d,'InputFormat','HH:mm:ss.SSS');
+%     d=timeofday(d);
     d=seconds(H-d)*10;
     x=1:length(v);
     x=x+d;
@@ -70,10 +71,11 @@ else
   
      % title('$$\dot{V}$$O2 in ml/min/kg','fontweight','bold','interpreter','latex','fontsize',16);
     ylim([0 70]);
- 
-    xLabel=0:5:length(v)/600;
-
+    
+    xLabel=0:5:x(end)/600;
     set(gca,'XTick', 0:5*600:length(v),'xticklabel',xLabel)
+    xlim([0 inf])
+    
     xlabel('Zeit [min]');
     MP4label=sprintfc('%5.1f',MP4);
     yline(MP4,'--r',['MP4' MP4label],'LabelVerticalAlignment','middle');

@@ -1,10 +1,5 @@
 cd(DB)
 
-if ~isfolder('Export')
-    mkdir Export;
-end
-
-
 D=dir('*.mat'); D={D.name};
 
 for e=1:length(D)
@@ -17,6 +12,11 @@ for e=1:length(D)
 end
 
 cd(RootF)
+
+if ~isfolder('Export')
+    mkdir Export;
+end
+
 cd('Export')
 
 writetable(Meta,['Export_' Datum '.xlsx'])
