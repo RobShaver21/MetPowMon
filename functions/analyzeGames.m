@@ -5,31 +5,31 @@ aa=1; ab=1;
 
 %% Schleife Games/Ordner
 
-for aa=1:length(Y)
+for aa=1:length(Files.Y)
     if SourceId==1              % Polar
         cd(DataF)
-        dataG=readgamedata(X,Y,aa,GameId);
-        cd(Y{aa})
+        dataG=readgamedata(Files.X,Files.Y,aa,GameId);
+        cd(Files(aa).Y{1})
         Z=dir('* *'); Z={Z.name}; % Z <- Spieler
-        games=split(Y{aa}, '_');
+        games=split(Files(aa).Y, '_');
         Einheit=[games{1} '_' games{2}];
         GameF=pwd;
         
     elseif SourceId==4          % Kinexxon
-        Glog=Smatch==Y(aa);
-        Z=STR(Glog);
+        Glog=Files.Smatch==Files(aa).Y;
+        Z=Files.STR(Glog);
         GameF=DataF;
-        str1=Smatch(Glog);str1=string(str1(1));
+        str1=Files.Smatch(Glog);str1=string(str1(1));
         str2=unique(Steam(Glog))'; str2=string(str2);
         Einheit=strcat(str1,"_",str2(1),"_",str2(2));
         
-        log=G.MatchID==str2num(str1);
-        Gsub=G(log,:);
+        log=Files.G.MatchID==str2num(str1);
+        Gsub=Files.G(log,:);
         
     elseif SourceId==3          % Polar API
-        load([Y(aa).folder '\' Y(aa).name])
+        load([Files.Y(aa).folder '\' Files.Y(aa).name])
         Z=Dout;
-        Einheit=split(Y(aa).name,'.');
+        Einheit=split(Files.Y(aa).name,'.');
         Einheit=Einheit{1};
     end
     
@@ -62,9 +62,9 @@ for aa=1:length(Y)
             player(cellfun('isempty',player)) = []; % remove empty cells from mm
             Vorname=player{1};
             Nachname=player{end};
-            Nr=Snumber(Glog);
+            Nr=Files.Snumber(Glog);
             Nr=Nr(ab);
-            [Norm, pos]=newplayer(Nr,Norm,Vorname,Nachname,SourceId);
+            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,SourceId);
             data=readtable(Z{ab});
             data=convertdata(data,varset,SourceId);
             
@@ -107,7 +107,7 @@ for aa=1:length(Y)
         end
         
         %% display progress
-        perc=round(100*((aa-1)/length(Y)+(ab/length(Z))/length(Y)),1);
+        perc=round(100*((aa-1)/length(Files.Y)+(ab/length(Z))/length(Files.Y)),1);
         fprintf(1,[num2str(perc) ' %'])
         
     end       % Spieler-Schleife

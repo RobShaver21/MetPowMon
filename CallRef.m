@@ -6,10 +6,7 @@ ProfileId=4;
 
 loadSettings()
 
-cd(RootF)
-cd('DataBase')
-allFiles = dir('*.mat');
-allNames = { allFiles.name };
+allNames=getAnalyzedSessions(P.Rootfolder)
 
 Name='8.1-28.1.2021';
 
@@ -28,4 +25,4 @@ Output=RefCalc(T,VarNames,Name);
 AllRef(ProfileId).Ref(end+1)=Output;
 
 cd(baseF)
-save Settings.mat AllRef DataProfile DataSource Mail VarNames Fields
+save Settings.mat S

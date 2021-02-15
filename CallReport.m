@@ -10,11 +10,8 @@ loadSettings()
 
 Ref=AllRef(ProfileId).Ref(1);
 
-DB=[char(RootF) '\DataBase'];
-cd(DB)
+allNames=getAnalyzedSessions(RootF)
 
-allFiles = dir('*.mat');
-allNames = { allFiles.name };
 
 %% pick Session
 pick=1:17;
