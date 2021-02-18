@@ -6,23 +6,22 @@ ProfileId=4;
 
 loadSettings()
 
-allNames=getAnalyzedSessions(P.Rootfolder)
+allNames=getAnalyzedSessions(P.T.Rootfolder)
 
 Name='8.1-28.1.2021';
 
+%% pick Sessions
+Sessions=17;
+allNames=allNames(Sessions);
+
 %% load data
-for a=1:numel(allFiles)
-    load(allNames{a})
-    if a==1
-        T=SaveStruct.Table;
-    else
-        T=[T; SaveStruct.Table];
-    end
-end
+
+T=getTablesforRef(allNames,P)
+
 %% calc Ref
 
 Output=RefCalc(T,VarNames,Name);
-AllRef(ProfileId).Ref(end+1)=Output;
+S.Profile(ProfileId).Ref(end+1)=Output;
 
 cd(baseF)
 save Settings.mat S

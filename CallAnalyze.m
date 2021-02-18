@@ -2,19 +2,13 @@ clearvars; close all; clc;
 
 %% Settings
 % 1=VFL 2=Hockey 3=EHF 4=HoNaMa 5=API_HoNaMa 6=API_Dana 7=API_DanaU21 8=API_Eagle
-ProfileId=2;        
+ProfileId=5;        
 
 loadSettings()
 
 Datum=datestr(now,'dd.mm.yyyy_HHMM');
 
-cd(P.Rootfolder)
-
-if ~isfolder('DataBase')
-    mkdir DataBase;
-end
-
-cd('DataBase'); DB=pwd;
+P=addDataBase(P);
 
 %% file structure
 
@@ -22,24 +16,31 @@ Files=getSessionsToAnalyze(P);
 
 %% pick Sessions
 Sessions=[17];
-if SourceId==1
+
+Files.Y=Files.Y(Sessions);
+if P.T.SourceId==1
     Files.X=Files.X(Sessions);
     Files.Y=Files.Y(Sessions);
-elseif SourceId==4
-    Files.Y=Files.Y(Sessions);
+elseif P.T.SourceId==4
+    %
+elseif P.T.SourceId==3
+    Files.YFolder(Sessions);
 end
 
 %% run script
-analyzeGames()
+
+P=analyzeGames(S,P,Files,Datum)
 
 %% Export
-exportTables()
+
+exportTables(P,Datum)
 
 %% save Norm
+
 cd(baseF)
 
-if ~isnan(RefId)
-    S.Profile(ProfileId).Norm=P.Norm;
-end
+
+S.Profile(ProfileId).Norm=P.Norm;
+
 
 save Settings.mat S

@@ -1,4 +1,6 @@
-cd(DB)
+function exportTables(P,Datum)
+
+cd(P.DB)
 
 D=dir('*.mat'); D={D.name};
 
@@ -11,7 +13,7 @@ for e=1:length(D)
     end
 end
 
-cd(RootF)
+cd(P.T.Rootfolder)
 
 if ~isfolder('Export')
     mkdir Export;
@@ -20,3 +22,4 @@ end
 cd('Export')
 
 writetable(Meta,['Export_' Datum '.xlsx'])
+end

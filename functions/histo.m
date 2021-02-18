@@ -1,26 +1,24 @@
-function [timevec, depvec1, depvec2]=histo(ind, thresh, ts, dep1, dep2)
+function [histTime, histVar1, histVar2]=histo(VecIn, thresh, ts, Var1, Var2)
 
-vectord=[thresh(2:end) 1000];
 
-log1=ind>=thresh;
-log2=ind>=vectord;
-log=log1~=log2;
+%%
+VecIn=(1:1e4)';
+thresh=[0 10 100 150 300 1000 2350];
+Var1=rand(size(VecIn));
+Var2=rand(size(VecIn));
+ts=0.1;
 
-timevec=sum(log)*ts/60;
+%%
+threshUp=[thresh(2:end) 1e5];
 
-depvec1=NaN(size(timevec));
-depvec2=NaN(size(timevec));
+id=VecIn>=thresh & VecIn<threshUp;
 
-for a=1:length(timevec)
-depvec1(a)=nansum(dep1(log(:,a)));
+histTime=sum(id)*ts/60;
+
+histVar1=arrayfun(@(x) nansum(Var1(id(:,x))),1:numel(histTime))
+
+if exist('Var2','var')
+    histVar2=arrayfun(@(x) nansum(Var2(id(:,x))),1:numel(histTime))
 end
-
-try
-for a=1:length(timevec)
-depvec2(a)=nansum(dep2(log(:,a)));
-end
-catch
-end
-
 
 end
