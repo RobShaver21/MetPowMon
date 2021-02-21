@@ -18,12 +18,12 @@ Files=getSessionsToAnalyze(P);
 Sessions=[17];
 
 Files.Y=Files.Y(Sessions);
-if P.T.SourceId==1
+if P.SourceId==1
     Files.X=Files.X(Sessions);
     Files.Y=Files.Y(Sessions);
-elseif P.T.SourceId==4
+elseif P.SourceId==4
     %
-elseif P.T.SourceId==3
+elseif P.SourceId==3
     Files.YFolder(Sessions);
 end
 
@@ -33,14 +33,12 @@ P=analyzeGames(S,P,Files,Datum)
 
 %% Export
 
-exportTables(P,Datum)
+exportTables(Files,P)
 
 %% save Norm
 
-cd(baseF)
-
-
 S.Profile(ProfileId).Norm=P.Norm;
 
+cd(baseF)
 
 save Settings.mat S

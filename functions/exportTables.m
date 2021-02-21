@@ -1,11 +1,13 @@
-function exportTables(P,Datum)
+function exportTables(Files,P)
+
+Datum=datestr(now,'dd.mm.yyyy_HHMM');
 
 cd(P.DB)
 
-D=dir('*.mat'); D={D.name};
+%Files=dir('*.mat'); Files={Files.name};
 
-for e=1:length(D)
-    load(D{e})
+for e=1:length(Files)
+    load(Files{e})
     if e==1
         Meta=SaveStruct.Table;
     else
@@ -13,7 +15,7 @@ for e=1:length(D)
     end
 end
 
-cd(P.T.Rootfolder)
+cd(P.Rootfolder)
 
 if ~isfolder('Export')
     mkdir Export;

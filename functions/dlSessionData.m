@@ -1,4 +1,9 @@
-function dlSessionData(AllSessions,players,teamurl,datarequest,DataF)
+function dlSessionData(AllSessions,M,DataF)
+
+players=M.players;
+teamurl=M.teamurl;
+datarequest=M.datarequest;
+
 %%
 failure = struct('player_id', {},'player_session_id', {},'session_id', {}, 'err', {});
 
@@ -19,11 +24,9 @@ for a=1:length(AllSessions)
     session_detail=send(datarequest,teamsessionurl);
     
     participants=session_detail.Body.Data.data.participants;
-    
-    datum=datetime(...
-        session_detail.Body.Data.data.start_time,...
-        'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss'...
-        );
+
+    datum=datetime(AllSessions(a).start_time,...
+        'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss');
     
     %% Player-Loop
     for ply=1:length(participants)
@@ -102,7 +105,7 @@ for a=1:length(AllSessions)
     end
     
     % save Output
-    filename=[char(DataF) '\' datestr(datum,'yyyy_mm_dd_HH_MM_SS'),'.mat'];
+    filename=[char(DataF) '\' datestr(datum,'yyyymmdd_HHMMSS'),'.mat'];
     save (filename,'Dout');
     
 end
@@ -114,7 +117,7 @@ if ~isdir(path)
     mkdir(path)
 end
 
-errlabel=[path '\Err_' datestr(now,'yyyy_mm_dd_HH_MM_SS') '.mat'];
+errlabel=[path '\Err_' datestr(now,'yyyymmdd_HHMMSS') '.mat'];
 
 save(errlabel,'failure');
 

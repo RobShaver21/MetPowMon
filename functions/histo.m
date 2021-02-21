@@ -2,11 +2,11 @@ function [histTime, histVar1, histVar2]=histo(VecIn, thresh, ts, Var1, Var2)
 
 
 %%
-VecIn=(1:1e4)';
-thresh=[0 10 100 150 300 1000 2350];
-Var1=rand(size(VecIn));
-Var2=rand(size(VecIn));
-ts=0.1;
+% VecIn=(1:1e4)';
+% thresh=[0 10 100 150 300 1000 2350];
+% Var1=rand(size(VecIn));
+% Var2=rand(size(VecIn));
+% ts=0.1;
 
 %%
 threshUp=[thresh(2:end) 1e5];

@@ -6,8 +6,8 @@ aa=1; ab=1;
 %% Schleife Games/Ordner
 
 for aa=1:length(Files.Y)
-    if P.T.SourceId==1              % Polar
-        cd(P.T.Datafolder)
+    if P.SourceId==1              % Polar
+        cd(P.Datafolder)
         dataG=readgamedata(Files.X,Files.Y,aa,P.T.GameId);
         cd(Files.Y{aa})
         Z=dir('* *'); Z={Z.name}; % Z <- Spieler
@@ -15,10 +15,10 @@ for aa=1:length(Files.Y)
         Einheit=[games{1} '_' games{2}];
         GameF=pwd;
         
-    elseif P.T.SourceId==4          % Kinexxon
+    elseif P.SourceId==4          % Kinexxon
         Glog=Files.Smatch==Files.Y{aa};
         Z=Files.STR(Glog);
-        GameF=P.T.Datafolder;
+        GameF=P.Datafolder;
         str1=Files.Smatch(Glog);str1=string(str1(1));
         str2=unique(Steam(Glog))'; str2=string(str2);
         Einheit=strcat(str1,"_",str2(1),"_",str2(2));
@@ -26,7 +26,7 @@ for aa=1:length(Files.Y)
         log=Files.G.MatchID==str2num(str1);
         Gsub=Files.G(log,:);
         
-    elseif P.T.SourceId==3          % Polar API
+    elseif P.SourceId==3          % Polar API
         load([Files.Y(aa).folder '\' Files.Y(aa).name])
         Z=Dout;
         Einheit=split(Files.Y(aa).name,'.');
@@ -38,25 +38,25 @@ for aa=1:length(Files.Y)
     for ab=1:length(Z)
         cd(GameF)
         
-        if P.T.SourceId==1      % Polar
+        if P.SourceId==1      % Polar
             player=split(Z{ab});
             SpielerNr=player{1};
             Vorname=player{P.T.PlayerInd};
             Nachname=player{end};
             Nr=str2double(SpielerNr);
-            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.T.SourceId);       %info bearbeiten
+            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);       %info bearbeiten
             
             old=pwd;
             cd(Z{ab});
             N=dir('*.csv'); N={N.name};                 % N <- Dateien der Spieler
             data=readtable(N{1});           % Import Funktion
-            data=convertdata(data,P.Source,P.T.SourceId);
+            data=convertdata(data,P.Source,P.SourceId);
             data=AddGpx(data);
             cd(old);
             
-            [DataStruct]=cutdatafromgame(dataG,data,P.T.SourceId,Nr); 
+            [DataStruct]=cutdatafromgame(dataG,data,P.SourceId,Nr); 
             
-        elseif P.T.SourceId==4      % Kinexxon
+        elseif P.SourceId==4      % Kinexxon
             playerO=(Files.Splayer(Glog));
             player=split(playerO(ab));
             player(cellfun('isempty',player)) = []; % remove empty cells from mm
@@ -64,23 +64,23 @@ for aa=1:length(Files.Y)
             Nachname=player{end};
             Nr=Files.Snumber(Glog);
             Nr=Nr(ab);
-            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.T.SourceId);
+            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);
             data=readtable(Z{ab});
-            data=convertdata(data,varset,P.T.SourceId);
+            data=convertdata(data,varset,P.SourceId);
             
             log=strtrim(string(playerO{ab}))==string(Gsub.Name);
             Gplayer=Gsub(log,:);
             
-            [DataStruct]=cutdatafromgame(Gplayer,data,P.T.SourceId,Nr); 
+            [DataStruct]=cutdatafromgame(Gplayer,data,P.SourceId,Nr); 
             
-        elseif P.T.SourceId==3          % Polar API
+        elseif P.SourceId==3          % Polar API
             Vorname=Z(ab).Vorname;
             Nachname=Z(ab).Nachname;
             Nr=Z(ab).SpielerNr;
-            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.T.SourceId)
+            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId)
             data=Z(ab).Daten;
-            data=convertdata(data,varset,P.T.SourceId);
-            [DataStruct]=cutdatafromgame(dataG,data,P.T.SourceId,Nr); 
+            data=convertdata(data,varset,P.SourceId);
+            [DataStruct]=cutdatafromgame(dataG,data,P.SourceId,Nr); 
             
         end
         %% Calculation
@@ -88,7 +88,7 @@ for aa=1:length(Files.Y)
         Str=table({Version},{Datum},{Einheit},{Vorname},{Nachname},{Nr},...
             'VariableNames', {'Version','Datum', 'Einheit','Vorname','Nachname','SpielerNr'});
         
-        if  P.T.SourceId==4
+        if  P.SourceId==4
             temp=Files.Steam(Glog);  Str.Team=string(temp{ab}); end
         
         for am=1:length(DataStruct)
@@ -121,7 +121,7 @@ for aa=1:length(Files.Y)
     save(strcat(Einheit, '.mat'),'SaveStruct');
     clear SaveStruct Export VecExp
      
-    cd(P.T.Rootfolder)
+    cd(P.Rootfolder)
     
 end       % Game-Schleife
 
