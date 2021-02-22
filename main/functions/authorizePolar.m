@@ -1,4 +1,10 @@
-function access_token=authorizePolar(client,refresh_token)
+function access_token=authorizePolar
+
+if isfile('auth.mat')
+    load auth.mat
+end
+
+load client.mat       % load client id & secret
 
 % Checks if refresh_token was issued for refresh_token-flow -> no code needed
 if exist('refresh_token','var')==1

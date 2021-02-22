@@ -13,6 +13,7 @@ outvarnames={...
     };
 
 c=cell(size(outvarnames))';
+a=1; ply=1;
 %%
 for a=1:length(AllSessions)
     %% GET session participants
@@ -76,18 +77,17 @@ for a=1:length(AllSessions)
             
             start_time=datetime(...
                 sampleresponse.Body.Data.data.start_time,...
-                'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss'...
-                );
-            Dout(ply).Daten.clock=time+start_time;
-            start_time.Format='HH:mm:ss';
-            
+                'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss');
+            start_time.Format='HH:mm:ss.S';
+            Dout(ply).Daten.clock=Dout(ply).Daten.t+start_time;
+
             Dout(ply).Beginn=start_time;
             
             end_time=datetime(...
                 sampleresponse.Body.Data.data.stop_time,...
                 'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss'...
                 );
-            end_time.Format='HH:mm:ss';
+            end_time.Format='HH:mm:ss.S';
             
             Dout(ply).Ende=start_time;
             Dout(ply).Dauer=end_time-start_time;
@@ -97,7 +97,7 @@ for a=1:length(AllSessions)
             % GET /v1/teams/training_sessions/{training_session_id}
         catch ME
             failure(end + 1).player_id = player_id;
-            failure(end).player_session__id = player_session_id;
+            failure(end).player_session_id = player_session_id;
             failure(end).session_id = session_id;
             failure(end).err  = getReport(ME);
         end

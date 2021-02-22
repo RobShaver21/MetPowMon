@@ -6,9 +6,11 @@ aa=1; ab=1;
 %% Schleife Games/Ordner
 
 for aa=1:length(Files.Y)
+    cd(P.Datafolder)
+    
     if P.SourceId==1              % Polar
         cd(P.Datafolder)
-        dataG=readgamedata(Files.X,Files.Y,aa,P.T.GameId);
+        dataG=readgamedata(Files.X,Files.Y,aa,P.GameId);
         cd(Files.Y{aa})
         Z=dir('* *'); Z={Z.name}; % Z <- Spieler
         games=split(Files.Y{aa}, '_');
@@ -27,21 +29,23 @@ for aa=1:length(Files.Y)
         Gsub=Files.G(log,:);
         
     elseif P.SourceId==3          % Polar API
-        load([Files.Y(aa).folder '\' Files.Y(aa).name])
+        cd(P.Datafolder)
+        file=Files.Y{aa};
+        load(file)
         Z=Dout;
-        Einheit=split(Files.Y(aa).name,'.');
-        Einheit=Einheit{1};
+        Einheit=extractBefore(file,'.mat');
+     
     end
     
     %% Schleife Spieler
     
     for ab=1:length(Z)
-        cd(GameF)
         
         if P.SourceId==1      % Polar
+            cd(GameF)
             player=split(Z{ab});
             SpielerNr=player{1};
-            Vorname=player{P.T.PlayerInd};
+            Vorname=player{P.PlayerInd};
             Nachname=player{end};
             Nr=str2double(SpielerNr);
             [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);       %info bearbeiten
@@ -79,7 +83,7 @@ for aa=1:length(Files.Y)
             Nr=Z(ab).SpielerNr;
             [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId)
             data=Z(ab).Daten;
-            data=convertdata(data,varset,P.SourceId);
+            data=convertdata(data,P.Source,P.SourceId);
             [DataStruct]=cutdatafromgame(dataG,data,P.SourceId,Nr); 
             
         end

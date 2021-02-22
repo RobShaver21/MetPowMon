@@ -8,14 +8,12 @@ loadSettings()
 
 Datum=datestr(now,'dd.mm.yyyy_HHMM');
 
-P=addDataBase(P);
-
 %% file structure
 
 Files=getSessionsToAnalyze(P);
 
 %% pick Sessions
-Sessions=[17];
+Sessions=[1];
 
 Files.Y=Files.Y(Sessions);
 if P.SourceId==1
@@ -24,7 +22,7 @@ if P.SourceId==1
 elseif P.SourceId==4
     %
 elseif P.SourceId==3
-    Files.YFolder(Sessions);
+    Files.Y(Sessions);
 end
 
 %% run script
