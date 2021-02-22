@@ -1,4 +1,4 @@
-baseF= ['C:\Users\' getenv('username') '\MATLAB Drive\MetPowMon'];
+baseF= ['C:\Users\' getenv('username') '\MATLAB Drive\MetPowMon\main'];
 cd(baseF)
 addpath(genpath(pwd));
 load Settings.mat;
