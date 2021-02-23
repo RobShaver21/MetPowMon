@@ -9,7 +9,7 @@ IndFilter={'Vorname','Nachname','Phase'};
 IndMean=groupsummary(AllTables,IndFilter,'mean',log);
 IndSD=groupsummary(AllTables,IndFilter,'std',log);
 
-varheader=VarNames.Var(log);
+varheader=(AllTables.Properties.VariableNames(log))';
 indheader=[IndFilter'; {'count'};  varheader];
 
 IndMean.Properties.VariableNames=indheader;

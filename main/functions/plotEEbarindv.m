@@ -40,7 +40,7 @@ end
         
 % set(gcf,'units','centimeter','position',[5,2,30,20])
 ba(1).CData = [1 1 0];
-ba(2).CData = [1 .5 0];
+%ba(2).CData = [1 .5 0];
 
 ae=EEsum.Vert(:,1);
 an=EEsum.Vert(:,2);

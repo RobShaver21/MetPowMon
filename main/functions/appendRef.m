@@ -1,5 +1,5 @@
 function [S,P]=appendRef(S,Output,ProfileId)
-
+P=S.Profile(ProfileId)
 
 if isempty(S.Profile(ProfileId).Ref)
     S.Profile(ProfileId).Ref=Output;

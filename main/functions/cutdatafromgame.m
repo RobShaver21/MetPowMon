@@ -61,6 +61,7 @@ elseif SourceId==3
     tdur=tdur';
     [y, m, d]=ymd(data.clock(1));
     clock=data.clock-datetime(y,m,d,0,0,0);
+    data.clock=clock;
     clock0=[clock; hours(24)];
     
     tdur(isnan(tdur(:,2)),2)=max(tdur(:,2));

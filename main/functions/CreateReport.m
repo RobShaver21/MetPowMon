@@ -1,4 +1,4 @@
-function CreateReport(Struct,VarNames,Ref,RootF,mode)
+ function CreateReport(Struct,VarNames,Ref,RootF,mode)
 % mode: 1 = Spiel, 2 = Training
 %% settings
 fprintf('Prepare Data...')
@@ -89,8 +89,15 @@ fprintf('Done.\n')
 
 %% Plots
 Paths=struct();
-Paths.Plot=[path '\Report\Plots\' Einheit '_'];
+Paths.P=[path '\Report\Plots\'];
+Paths.Plot=[Paths.P Einheit '_'];
 Paths.Report=[path '\Report\'];
+
+if ~isfolder(Paths.P)
+    mkdir(Paths.P); end
+
+if ~isfolder(Paths.Report)
+    mkdir(Paths.Report); end
 
 %% Refplot
 fprintf('Create Teamplot...')
