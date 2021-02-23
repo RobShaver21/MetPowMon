@@ -15,7 +15,7 @@ access_token=authorizePolar;
 
 %% get Sessions
 
-[AllSessions, M]=getSessions(P.GameId,access_token);
+[AllSessions, M]=getSessions(P.api,access_token);
 
 %% Pick sessions
 

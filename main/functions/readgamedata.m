@@ -1,6 +1,5 @@
-function [dataG]=readgamedata(X,Y,aa,id)
+function [dataG]=readgamedata(X,Y,aa)
 
-if id==1
     for posG=1:length(X)        % Position Übersichtsdatei
         if X{posG}(1:13)==Y{aa}(1:13)
             break
@@ -8,5 +7,5 @@ if id==1
     end
     
     dataG=readtable(X{posG});       % Übersichtsdatei einlesen
-end
+
 end

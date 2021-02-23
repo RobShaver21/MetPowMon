@@ -53,7 +53,7 @@ for aa=1:length(Files.Y)
             old=pwd;
             cd(Z{ab});
             N=dir('*.csv'); N={N.name};                 % N <- Dateien der Spieler
-            data=readtable(N{1});           % Import Funktion
+            data=readtable(N{1});           % Iport Funktion
             data=convertdata(data,P.Source,P.SourceId);
             data=AddGpx(data);
             cd(old);
@@ -81,10 +81,10 @@ for aa=1:length(Files.Y)
             Vorname=Z(ab).Vorname;
             Nachname=Z(ab).Nachname;
             Nr=Z(ab).SpielerNr;
-            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId)
+            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);
             data=Z(ab).Daten;
             data=convertdata(data,P.Source,P.SourceId);
-            [DataStruct]=cutdatafromgame(dataG,data,P.SourceId,Nr); 
+            [DataStruct]=cutdatafromgame(Z(ab),data,P.SourceId,Nr); 
             
         end
         %% Calculation

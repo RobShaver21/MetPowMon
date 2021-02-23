@@ -1,19 +1,21 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="C:\Users\schaertb\MATLAB Drive\MP\MPA.prj" location="C:\Users\schaertb\MATLAB Drive\MP" name="MPA" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="2397241625" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>MPA</param.appname>
     <param.icon />
     <param.icons />
-    <param.version>0.0</param.version>
-    <param.authnamewatermark>Robin Schäfer, Jan Venzke, Petra Platen</param.authnamewatermark>
+    <param.version>1.0</param.version>
+    <param.authnamewatermark>Robin Schäfer</param.authnamewatermark>
     <param.email>robin.schaefer@rub.de</param.email>
     <param.company>RUB, Lehrstuhl für Sportmed. und Sportern.</param.company>
-    <param.summary>The Metabolic Power App analyzes GPS-data on an erngy-based approach</param.summary>
+    <param.summary>- Analyzes Polar and Kinexon data
+- Creates session reports /w reference
+- Handles csv's and can download data from Polar Team Pro via API</param.summary>
     <param.description>Additional Information...</param.description>
-    <param.screenshot>C:\Users\schaertb\Desktop\Download.png</param.screenshot>
+    <param.screenshot />
     <param.guid />
-    <param.installpath.string>\RUB, Lehrstuhl für Sportmed. und Sportern.\MPA\</param.installpath.string>
+    <param.installpath.string>\MPA\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
-    <param.logo>C:\Users\schaertb\Desktop\Download.png</param.logo>
+    <param.logo />
     <param.install.notes />
     <param.target.install.notes />
     <param.intermediate>${PROJECT_ROOT}\MPA\for_testing</param.intermediate>
@@ -41,15 +43,15 @@
 	 
  Input Arguments 
 	 -?  print help on how to use the application 
-	 input arguments 
- Description 
- 	 Additional Information...</param.help.text>
+	 input arguments</param.help.text>
     <unset>
       <param.icon />
       <param.icons />
+      <param.version />
+      <param.screenshot />
       <param.guid />
-      <param.installpath.string />
       <param.installpath.combo />
+      <param.logo />
       <param.install.notes />
       <param.target.install.notes />
       <param.intermediate />
@@ -79,18 +81,43 @@
     <fileset.resources />
     <fileset.package />
     <fileset.depfun>
-      <file>${PROJECT_ROOT}\DataBase.mat</file>
-      <file>${PROJECT_ROOT}\Settings.mat</file>
-      <file>${PROJECT_ROOT}\uigetdir2.m</file>
+      <file>${PROJECT_ROOT}\APIapp.mlapp</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\auth.mat</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\client.mat</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\addDataBase.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\AddGpx.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\analyzeGames.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\authorizePolar.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\convertdata.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\cTRIMP.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\cutdatafromgame.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\dlSessionData.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\exportTables.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\FeatureCalc.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getAnalyzedSessions.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getSessions.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getSessionsToAnalyze.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getTablesforRef.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\histo.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\newplayer.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\profileset.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\readgamedata.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\RefCalc.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\sprintcalc.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\uigetdir2.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\VO2t.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\xml2struct.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\loadSettings.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\Settings.mat</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\MPA\for_testing" name="splash.png" optional="false">C:\Users\schaertb\MATLAB Drive\MP\MPA\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\MPA\for_testing" name="readme.txt" optional="true">C:\Users\schaertb\MATLAB Drive\MP\MPA\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\MPA\for_testing" name="MPA.exe" optional="false">C:\Users\schaertb\MATLAB Drive\MP\MPA\for_testing\MPA.exe</file>
+      <file location="${PROJECT_ROOT}\MPA\for_testing" name="MPA.exe" optional="false">C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\MPA.exe</file>
+      <file location="${PROJECT_ROOT}\MPA\for_testing" name="splash.png" optional="false">C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\MPA\for_testing" name="readme.txt" optional="true">C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\readme.txt</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2020a</root>
+      <root>C:\Program Files\MATLAB\R2020b</root>
       <toolboxes>
         <toolbox name="neuralnetwork" />
       </toolboxes>

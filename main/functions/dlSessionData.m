@@ -7,10 +7,7 @@ datarequest=M.datarequest;
 %%
 failure = struct('player_id', {},'player_session_id', {},'session_id', {}, 'err', {});
 
-outvarnames={...
-    'Datum','ID','Nachname','Vorname','SpielerNr','Beginn','Ende',...
-    'Dauer','markers','Daten'
-    };
+outvarnames={'ID','Nachname','Vorname','SpielerNr','Beginn','Ende','markers','Daten'};
 
 c=cell(size(outvarnames))';
 a=1; ply=1;
@@ -28,7 +25,7 @@ for a=1:length(AllSessions)
 
     datum=datetime(AllSessions(a).start_time,...
         'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss');
-    
+        
     %% Player-Loop
     for ply=1:length(participants)
         try
@@ -43,7 +40,7 @@ for a=1:length(AllSessions)
                 ];
             sampleresponse=send(datarequest, sampleurl);
             %% Generate Output
-            Dout(ply).Datum=datum;
+
             Dout(ply).ID=player_id;
             
             sensor_data=[sampleresponse.Body.Data.data.samples.values{:,:}]';
@@ -75,22 +72,14 @@ for a=1:length(AllSessions)
                 Dout(ply).SpielerNr=player_id;
             end
             
-            start_time=datetime(...
-                sampleresponse.Body.Data.data.start_time,...
+            
+            sampling_start=datetime(sampleresponse.Body.Data.data.start_time,...
                 'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss');
-            start_time.Format='HH:mm:ss.S';
-            Dout(ply).Daten.clock=Dout(ply).Daten.t+start_time;
-
-            Dout(ply).Beginn=start_time;
+            sampling_start.Format='HH:mm:ss.S';
             
-            end_time=datetime(...
-                sampleresponse.Body.Data.data.stop_time,...
-                'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss'...
-                );
-            end_time.Format='HH:mm:ss.S';
-            
-            Dout(ply).Ende=start_time;
-            Dout(ply).Dauer=end_time-start_time;
+            Dout(ply).Daten.clock=Dout(ply).Daten.t+sampling_start;
+            Dout(ply).Beginn=AllSessions(a).start_time;
+            Dout(ply).Ende=AllSessions(a).end_time;
             Dout(ply).markers=session_detail.Body.Data.data.markers;
             
             % add Polar Data 
@@ -100,20 +89,21 @@ for a=1:length(AllSessions)
             failure(end).player_session_id = player_session_id;
             failure(end).session_id = session_id;
             failure(end).err  = getReport(ME);
-        end
-        
+        end 
     end
     
     % save Output
+    
     filename=[char(DataF) '\' datestr(datum,'yyyymmdd_HHMMSS'),'.mat'];
     save (filename,'Dout');
     
 end
 
 % save error log
+
 path=[char(DataF) '\error'];
 
-if ~isdir(path)
+if ~isfolder(path)
     mkdir(path)
 end
 

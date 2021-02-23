@@ -12,29 +12,23 @@ if SourceId==1
     for p=1:length(OldName)
         NewName(p)={['Sys_' OldName{p}]};
     end
-    
-    
+
     clock=data.clock(:);
     tdur=table2array(dataG(posPG,7:8));
     [y, m, d]= ymd(tdur);
     tdur=tdur-datetime(y,m,d,0,0,0);
     tdur=[clock(1) clock(end); tdur];
-    dur=tdur(:,2)-tdur(:,1);
-    t1=datestr(tdur(:,1),'HH:MM:SS');
+    clock0=[clock; hours(24)];
+    
+    tp=arrayfun(@(x) find(clock0>=x,1,'first'),tdur);
+    tp(tp>numel(clock))=numel(clock);
+    
+    newtp=clock(tp);
+    dur=diff(newtp,1,2);
+    dur=datestr(dur,'HH:MM:SS');
+    t1=datestr(newtp(:,1),'HH:MM:SS');
     t2=datestr(tdur(:,2),'HH:MM:SS');
     dur=datestr(dur,'HH:MM:SS');
-    
-    tp=[1 height(data)];
-    try
-        tp = arrayfun(@(x) find(clock>=x,1,'first'),tdur);
-        
-        
-    catch
-    end
-    % copy, if ind. time was shorter than session
-    if numel(tp)<3
-        tp=[tp;tp];
-    end
     
     for a=1:length(tp(:,1))
         DataStruct(a).Phase=Phase{a};
@@ -52,12 +46,58 @@ if SourceId==1
             DataStruct(a).AddDataRows.Properties.VariableNames=NewName;
         end
     end
-
-%%
+    
+    %%
 elseif SourceId==3
+    St=dataG.markers;
+    St(end+1).start_time=dataG.Beginn;
+    St(end).end_time=dataG.Ende;
+    tdur=string([{St.start_time}; {St.end_time}]);
+    tdur=datetime(tdur,'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss');
+    Ges=[data.clock(1);data.clock(end)];
+    tdur=[tdur Ges];
+    [y, m, d]= ymd(tdur);
+    tdur=tdur-datetime(y,m,d,0,0,0);
+    tdur=tdur';
+    [y, m, d]=ymd(data.clock(1));
+    clock=data.clock-datetime(y,m,d,0,0,0);
+    clock0=[clock; hours(24)];
+    
+    tdur(isnan(tdur(:,2)),2)=max(tdur(:,2));
+    tdur(isnan(tdur(:,1)),1)=min(tdur(:,1));
+
+    tp=arrayfun(@(x) find(clock0>=x,1,'first'),tdur);
+    tp(tp>numel(clock))=numel(clock);
+    
+    newtp=clock(tp);
+    dur=diff(newtp,1,2);
+    dur=datestr(dur,'HH:MM:SS');
+    t1=datestr(newtp(:,1),'HH:MM:SS');
+    t2=datestr(newtp(:,2),'HH:MM:SS');
+   
+    St(end).name='Gesamte Einheit';
+    St(end+1).name='Gesamt';
+    Phase={St.name};
+    
+    Name=[dataG.Vorname ' ' dataG.Nachname];
+    
+    Einheit=datetime(dataG.Beginn, 'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss');
+    Einheit=datestr(Einheit,'yyyymmdd_HHMMSS');
+    for a=1:numel(St)
+        
+        DataStruct(a).Phase=Phase{a};
+        DataStruct(a).Table=data(tp(a,1):tp(a,2),:);
+        DataStruct(a).Dauer=dur(a,:);
+        DataStruct(a).Beginn=t1(a,:);
+        DataStruct(a).Ende=t2(a,:);
+        DataStruct(a).Name=Name;
+        DataStruct(a).Einheit=Einheit;
+        
+    end
     
     
-%% Kinexon
+    
+    %% Kinexon
 elseif SourceId==4
     % dataG=Gplayer;      % remove later
     NewName=dataG.Properties.VariableNames;

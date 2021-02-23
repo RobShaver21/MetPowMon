@@ -27,7 +27,7 @@ end
 
 %% run script
 
-P=analyzeGames(S,P,Files,Datum)
+P=analyzeGames(S,P,Files,Datum);
 
 %% Export
 

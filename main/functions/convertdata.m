@@ -4,25 +4,27 @@ function [NewData]=convertdata(data,varset,ID)
 if ID==1
     t=data{:,varset.t};
     t=seconds(t);
-    HF=data{:,varset.HR};
+    HR=data{:,varset.HR};
     v=data{:,varset.v};
     v=v/3.6;
     s=diff(data{:,varset.s});
     s(end+1)=0;
     a=data{:,varset.a};
     clock=data{:,varset.clock};
-    NewData=table(t,clock,s,v,a,HF);
+    NewData=table(t,clock,s,v,a,HR);
     
     %% Polar API
 elseif ID==3
     select=[5:11];
     VarNames=varset.Properties.VariableNames;
     VarNames=VarNames(select);
-    val=[varset{1,select}]
+    val=[varset{1,select}];
     % Header=VarNames(val);
     data.Properties.VariableNames(val)=VarNames;
-    [data id] = fillmissing(data,'previous','MaxGap',20);
-    %% Kinexxon
+    data.s=gradient(data.s);
+    data.v=data.v/3.6;
+    [NewData id] = fillmissing(data,'previous','MaxGap',seconds(2));
+    %% Kinexon
 elseif ID==4
     
     % filter
@@ -56,104 +58,6 @@ elseif ID==4
     
     NewData=table(t,clock,s,v,a,x,y);
    end 
-    %%
-    
-    % Positionen filtern?
-    %     xf=filtfilt(bv,av,x);
-    %     yf=filtfilt(bv,av,y);
-    %     %sf=filtfilt(bv,av,s);
-    
-    
-    
-    % delete
-    %     figure
-    %     tiledlayout(2,2)
-    %     nexttile
-    %     plot(x)
-    %     title('x')
-    %     nexttile
-    %     plot(y)
-    %     title('y')
-    %     nexttile
-    %     plot(xf)
-    %     title('xf')
-    %     nexttile
-    %     plot(yf)
-    %     title('yf')
-    %
-    %     dx=diff(x);
-    %     dy=diff(y);
-    %     dt=diff(t);
-    %     dt(end+1)=dt(end);
-    %     dxf=diff(xf);
-    %     dyf=diff(yf);
-    %
-    %     s=sqrt(dx.^2+dy.^2);
-    %     s(end+1)=0;
-    %     sf=sqrt(dxf.^2+dyf.^2);
-    %     sf(end+1)=0;
-    %     v=s./dt;
-    %     vf=sf./dt;
-    %
-    %     vB=filtfilt(bv,av,v);
-    %     vBf=filtfilt(bv,av,vf);
-    %
-    %     figure
-    %     tiledlayout(2,2)
-    %     nexttile
-    %     plot(v)
-    %     title('v')
-    %     nexttile
-    %     plot(vf)
-    %     title('vf')
-    %     nexttile
-    %     plot(vB)
-    %     title('vB')
-    %     nexttile
-    %     plot(vBf)
-    %     title('vBf')
-    %
-    %     sV=v.*dt;
-    %     sVB=vB.*dt;
-    %
-    %     figure
-    %     tiledlayout(2,1)
-    %     nexttile
-    %     plot(sV)
-    %     title('sV')
-    %     nexttile
-    %     plot(sVB)
-    %     title('sVB')
-    %
-    %     sum(sV)
-    %
-    %     sum(sVB)
-    %
-    %     sum(s)
-    %     sum(sf)
-    
-    %% plausibilty plots - remove later
-    %     old=pwd;
-    %     cd
-    
-    % img=figure('visible','off')
-    %
-    % subplot(3,1,1)
-    % plot(v)
-    % title('v [m/s]')
-    %
-    % subplot(4,1,2)
-    % plot(v1)
-    % title('v [m/s] butter 1hz')
-    %
-    % subplot(4,1,3)
-    % plot(a)
-    % title('a [m/s²] raw (velocity filtered)')
-    %
-    % subplot(4,1,4)
-    % plot(a2)
-    % title('a [m/s²] butter 0.5hz')
-    
     
 
 end

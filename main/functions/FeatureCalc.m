@@ -18,7 +18,7 @@ MPz=[0 .25 .50 1 1.75 2.75];
  aZ=[-10 -3 -2 -1 0 1 2 3];      % alt
 % vZ=[0 0.1 2 4 5.4 6.9];         % men EHF
 % aZ=[-10 -4 -3 -2 -1 0 1 2 3 4]; % men EHF
-HFZ=[.5 .6 .7 .8 .9];
+
 
 MP4=Norm.MP4(pos);                          
 EC=Norm.EC0(pos);
@@ -126,30 +126,33 @@ PeakMp=max(T.MP);
 
 %% Heart Rate
 try
+    
+HFZ=[.5 .6 .7 .8 .9];
+    
 HRrest=Norm.HRrest(pos);
 HRmax=Norm.HRmax(pos);
 aind=Norm.a(pos);    bind=Norm.b(pos);
 
 agen=0.86;      bgen=1.67;
-HF=DataS.Table.HF;
-HF=fillmissing(HF,'linear');
-HFmax=200;      %define ind. HFmax
-iHFZ=HFZ*HFmax; 
+HR=DataS.Table.HR;
+HR=fillmissing(HR,'linear');
 
-[ZeitHfHist, ~]=histo(HF, iHFZ, ts, T.s);
-AvgHf=nanmean(HF); 
+iHFZ=HFZ*HRmax; 
+
+[ZeitHfHist, ~]=histo(HR, iHFZ, ts, T.s);
+AvgHf=nanmean(HR); 
 SHRZ=sum(ZeitHfHist.*[1 2 3 4 5]);
 
 dHR=(AvgHf-HRrest)/(HRmax-HRrest);
-dt=numel(HF)*ts/60;
+dt=numel(HR)*ts/60;
 
 y=agen*exp(bgen*dHR);
 TRIMP=dt*dHR*y;
 
-cTRIMPgen=cTRIMP(HF,60,ts,HRrest,HRmax,agen,bgen);
-cTRIMPind=cTRIMP(HF,60,ts,HRrest,HRmax,aind,bind);
+cTRIMPgen=cTRIMP(HR,60,ts,HRrest,HRmax,agen,bgen);
+cTRIMPind=cTRIMP(HR,60,ts,HRrest,HRmax,aind,bind);
 
-PeakHf=max(HF);
+PeakHf=max(HR);
 IntExt=cTRIMPind/EEjkg;
 
 
@@ -188,30 +191,4 @@ Vecs=struct('LfdNr',LfdNr,'Vorname',Str.Vorname,'Nachname',Str.Nachname,'Phase',
 % end
 
 
-
-
-
-%%
-% if plotID==1
-%     
-% img=figure ('visible','off');
-% set(gcf, 'Position',  [100, 100, 1600, 1200])
-% 
-% subplot(3,1,1)
-% plot(T.v)
-% title('v [m/s]')
-% 
-% subplot(3,1,2)
-% plot(T.a)
-% title('a [m/s²]')
-% 
-% subplot(3,1,3)
-% plot(T.MP)
-% title('MP [W/kg]')
-% 
-% old=pwd;
-% cd('C:\Users\schaertb\OneDrive - rub.de\Documents\Lehrstuhl\MetPow\3_EHF\Plots')
-% exportgraphics(img,strcat(Str.Einheit{1}," ",Str.Nachname{1},".png"))
-% cd(old)
-% close(gcf)
 end
