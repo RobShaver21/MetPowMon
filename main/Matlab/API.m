@@ -2,7 +2,7 @@ clearvars; close all; clc;
 
 %% Settings
 % 1=VFL 2=Hockey 3=EHF 4=HoNaMa 5=API_HoNaMa 6=API_Dana 7=API_DanaU21 8=API_eagle
-ProfileId=5;               
+ProfileId=6;               
 loadSettings()
 
 %% import

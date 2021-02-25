@@ -19,7 +19,7 @@ if exist('refresh_token','var')==1
     request = matlab.net.http.RequestMessage(method,header,data);
     uri = matlab.net.URI('https://auth.polar.com/oauth/token');
     response=send(request,uri);
-
+    
 elseif exist('refresh_token','var')==0 || response.StatusCode ~=200
  % If not successful or first time
  % URL redirects back to authorization callback domain with code valid for 12 h
@@ -27,10 +27,7 @@ elseif exist('refresh_token','var')==0 || response.StatusCode ~=200
     url=['https://auth.polar.com/oauth/authorize?client.id='...
         client.id '&response_type=code&scope=team_read'];
     web(url);
-    prompt = {'Enter Code'};
-    dlgtitle = 'Input';
-    dims = [1 35];
-    answer = inputdlg(prompt,dlgtitle,dims);
+    answer = inputdlg('Enter Code','Input');
     code=char(answer);
     %Send Post request for token
     data = ['grant_type=authorization_code&code=', code];

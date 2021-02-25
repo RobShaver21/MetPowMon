@@ -10,7 +10,7 @@ for aa=1:length(Files.Y)
     
     if P.SourceId==1              % Polar
         cd(P.Datafolder)
-        dataG=readgamedata(Files.X,Files.Y,aa,P.GameId);
+        dataG=readgamedata(Files.X,Files.Y,aa);
         cd(Files.Y{aa})
         Z=dir('* *'); Z={Z.name}; % Z <- Spieler
         games=split(Files.Y{aa}, '_');
@@ -25,7 +25,7 @@ for aa=1:length(Files.Y)
         str2=unique(Steam(Glog))'; str2=string(str2);
         Einheit=strcat(str1,"_",str2(1),"_",str2(2));
         
-        log=Files.G.MatchID==str2num(str1);
+        log=Files.G.MatchID==str2double(str1);
         Gsub=Files.G(log,:);
         
     elseif P.SourceId==3          % Polar API
@@ -43,20 +43,15 @@ for aa=1:length(Files.Y)
         
         if P.SourceId==1      % Polar
             cd(GameF)
-            player=split(Z{ab});
-            SpielerNr=player{1};
-            Vorname=player{P.PlayerInd};
-            Nachname=player{end};
-            Nr=str2double(SpielerNr);
+            [Nr,Vorname,Nachname]=extractFolderInfo(Z{ab});
             [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);       %info bearbeiten
-            
-            old=pwd;
+
             cd(Z{ab});
             N=dir('*.csv'); N={N.name};                 % N <- Dateien der Spieler
             data=readtable(N{1});           % Iport Funktion
             data=convertdata(data,P.Source,P.SourceId);
             data=AddGpx(data);
-            cd(old);
+            cd(GameF);
             
             [DataStruct]=cutdatafromgame(dataG,data,P.SourceId,Nr); 
             

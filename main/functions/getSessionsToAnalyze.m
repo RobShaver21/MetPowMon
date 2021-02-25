@@ -8,10 +8,9 @@ if P.SourceId==1      % Polar Download
     Files.Y=Y(strlength(Y)>2);
     
 elseif P.SourceId==4      % Kinexxon
-    cd(RootF);  
-    G=readtable('Phase.csv'); 
-    cd(DataF);     % read Table for cutting data
-    Field=nan;
+    cd(P.Rootfolder);  
+    G=readtable('Phase.csv'); % read Table for cutting data
+    cd(P.Datafolder);     
     
     STR=dir('*.csv'); STR={STR.name};
     Smatch=extractBetween(STR,'match=','_')';
