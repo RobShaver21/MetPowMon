@@ -14,8 +14,7 @@ if exist('refresh_token','var')==1
     data = ['grant_type=refresh_token&refresh_token=', refresh_token];
     header=matlab.net.http.HeaderField(...
         'Authorization',auth,...
-        'Content-Type',Content_Type...
-        );
+        'Content-Type',Content_Type);
     request = matlab.net.http.RequestMessage(method,header,data);
     uri = matlab.net.URI('https://auth.polar.com/oauth/token');
     response=send(request,uri);
