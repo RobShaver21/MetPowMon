@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2200638577" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="527711935" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>MPA</param.appname>
     <param.icon />
     <param.icons />
@@ -10,8 +10,8 @@
     <param.summary>- Analyzes Polar and Kinexon data
 - Creates session reports /w reference
 - Handles csv's and can download data from Polar Team Pro via API</param.summary>
-    <param.description />
-    <param.screenshot />
+    <param.description>https://github.com/RobShaver21/MetPowMon</param.description>
+    <param.screenshot>C:\Users\Robin\Downloads\1024px-Lightning_Bolt_on_Circle.svg.png</param.screenshot>
     <param.guid />
     <param.installpath.string>\MPA\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
@@ -43,13 +43,13 @@
 	 
  Input Arguments 
 	 -?  print help on how to use the application 
-	 input arguments</param.help.text>
+	 input arguments 
+ Description 
+ 	 https://github.com/RobShaver21/MetPowMon</param.help.text>
     <unset>
       <param.icon />
       <param.icons />
       <param.version />
-      <param.description />
-      <param.screenshot />
       <param.guid />
       <param.installpath.combo />
       <param.logo />
@@ -79,38 +79,16 @@
     <fileset.main>
       <file>${PROJECT_ROOT}\MPA.mlapp</file>
     </fileset.main>
-    <fileset.resources />
+    <fileset.resources>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\templaterpt.dotx</file>
+    </fileset.resources>
     <fileset.package />
     <fileset.depfun>
       <file>${PROJECT_ROOT}\APIapp.mlapp</file>
       <file>${PROJECT_ROOT}\NewProfile.mlapp</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\auth.mat</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\client.mat</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\addDataBase.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\AddGpx.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\analyzeGames.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\appendRef.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\authorizePolar.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\convertdata.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\cTRIMP.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\cutdatafromgame.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\dlSessionData.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\exportTables.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\extractFolderInfo.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\FeatureCalc.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getAnalyzedSessions.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getSessions.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getSessionsToAnalyze.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getTablesforRef.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\histo.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\newplayer.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\profileset.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\readgamedata.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\RefCalc.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\sprintcalc.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\uigetdir2.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\VO2t.m</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\xml2struct.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\loadSettings.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\Settings.mat</file>
     </fileset.depfun>
