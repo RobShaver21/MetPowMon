@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2397241625" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="2200638577" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>MPA</param.appname>
     <param.icon />
     <param.icons />
@@ -10,7 +10,7 @@
     <param.summary>- Analyzes Polar and Kinexon data
 - Creates session reports /w reference
 - Handles csv's and can download data from Polar Team Pro via API</param.summary>
-    <param.description>Additional Information...</param.description>
+    <param.description />
     <param.screenshot />
     <param.guid />
     <param.installpath.string>\MPA\</param.installpath.string>
@@ -48,6 +48,7 @@
       <param.icon />
       <param.icons />
       <param.version />
+      <param.description />
       <param.screenshot />
       <param.guid />
       <param.installpath.combo />
@@ -82,17 +83,20 @@
     <fileset.package />
     <fileset.depfun>
       <file>${PROJECT_ROOT}\APIapp.mlapp</file>
+      <file>${PROJECT_ROOT}\NewProfile.mlapp</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\auth.mat</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\client.mat</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\addDataBase.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\AddGpx.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\analyzeGames.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\appendRef.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\authorizePolar.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\convertdata.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\cTRIMP.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\cutdatafromgame.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\dlSessionData.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\exportTables.m</file>
+      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\extractFolderInfo.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\FeatureCalc.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getAnalyzedSessions.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\functions\getSessions.m</file>

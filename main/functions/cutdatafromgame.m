@@ -1,5 +1,8 @@
-function DataStruct=cutdatafromgame(dataG,data,SourceId,Nr)
+function DataStruct=cutdatafromgame(dataG,data,P,Nr)
 
+
+SourceId=P.SourceId;
+fs=P.Source.ts;
 %% Polar
 if SourceId==1
     
@@ -120,7 +123,7 @@ elseif SourceId==4
     %     dataG(log,:)=[];      % select netto only
     
     %
-    clock=data.clock(:);                    % t-Vec from data
+    clock=string(datestr(data.clock));                    % t-Vec from data
     clock=split(clock);
     clock=duration(clock(:,2));              % convert to duration array
     
@@ -135,12 +138,13 @@ elseif SourceId==4
     
     log=tdur(:,2)>clock(end);
     tdur(log,:)=[];
-    
-    try     tp = arrayfun(@(x) find(clock>=x,1,'first'),tdur);
-    catch end
-    
-    
+     
+    tp = arrayfun(@(x) find(clock>=x,1,'first'),tdur);
+
     dur=tdur(:,2)-tdur(:,1);                % dataG
+    Add(log,:)=[];
+    check=sum(seconds([dur-Add])>1);
+
     t1=datestr(tdur(:,1),'HH:MM:SS');
     t2=datestr(tdur(:,2),'HH:MM:SS');
     dur=datestr(dur,'HH:MM:SS');
@@ -150,15 +154,15 @@ elseif SourceId==4
     t12=datestr(tdur2(:,1),'HH:MM:SS');
     t22=datestr(tdur2(:,2),'HH:MM:SS');
     dur2=datestr(durT,'HH:MM:SS');
-    durSum=datestr(sum(durT),'HH:MM:SS');
+    durSum=minutes(sum(durT));
     %
     
     
     DataStruct(1).Phase="Brutto";
     DataStruct(1).Table=data;
     DataStruct(1).Dauer=height(data)*0.066 /60;
-    DataStruct(1).Beginn=data.clock(1);
-    DataStruct(1).Ende=data.clock(end);
+    DataStruct(1).Beginn=datestr(clock(1),'HH:MM:SS');
+    DataStruct(1).Ende=datestr(clock(end),'HH:MM:SS');
     DataStruct(1).Name=Name;
     DataStruct(1).Einheit=Einheit;
     
@@ -169,7 +173,7 @@ elseif SourceId==4
     for a=1:length(tp(:,1))
         DataStruct(a+1).Phase=dataG.PhaseId(a);
         DataStruct(a+1).Table=data(tp(a,1):tp(a,2),:);
-        DataStruct(a+1).Dauer=dur2(a,:);
+        DataStruct(a+1).Dauer=minutes(durT(a,:));
         DataStruct(a+1).Beginn=t12(a,:);
         DataStruct(a+1).Ende=t22(a,:);
         DataStruct(a+1).Name=dataG.Name(a);
@@ -181,7 +185,7 @@ elseif SourceId==4
         
     end
     
-    try
+    %try
         DataStruct(end+1).Phase="Netto";
         DataStruct(end).AddDataRows=Empty;       % add dummy data from phase 1
         DataStruct(end).AddDataRows.Properties.VariableNames=NewName;
@@ -197,7 +201,7 @@ elseif SourceId==4
         DataStruct(end).Einheit=dataG.MatchID(1);
         
         
-    catch end
+    %catch end
     
     
     

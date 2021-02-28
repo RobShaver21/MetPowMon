@@ -1,4 +1,9 @@
-function [Features, Vecs]=FeatureCalc(DataS,Str,Norm,Fields,ts,pos)
+function [Features, Vecs]=FeatureCalc(DataS,Str,S,P,pos)
+
+ts=P.Source.ts;
+Fields=S.Fields;
+Norm=P.Norm;
+
 
 T=DataS.Table;
 T.t=DataS.Table.t;

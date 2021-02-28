@@ -9,10 +9,11 @@ if P.SourceId==1      % Polar Download
     
 elseif P.SourceId==4      % Kinexxon
     cd(P.Rootfolder);  
-    G=readtable('Phase.csv'); % read Table for cutting data
+    Files.G=readtable('Phase.csv'); % read Table for cutting data
     cd(P.Datafolder);     
     
     STR=dir('*.csv'); STR={STR.name};
+    Files.STR=STR';
     Smatch=extractBetween(STR,'match=','_')';
     Files.Smatch=str2double(Smatch);
     Files.Steam=extractBetween(STR,'team=','_')';

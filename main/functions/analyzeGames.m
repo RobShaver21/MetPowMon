@@ -1,4 +1,4 @@
-function [P]=analyzeGames(S,P,Files,Datum)
+function P=analyzeGames(S,P,Files,Datum)
 
 Version='Beta';    %% Skriptversion
 aa=1; ab=1;
@@ -18,11 +18,11 @@ for aa=1:length(Files.Y)
         GameF=pwd;
         
     elseif P.SourceId==4          % Kinexxon
-        Glog=Files.Smatch==Files.Y{aa};
-        Z=Files.STR(Glog);
+        Glog=Files.Smatch==str2double(Files.Y{aa});
+        Z=Files.STR(Glog);                  % filter session
         GameF=P.Datafolder;
-        str1=Files.Smatch(Glog);str1=string(str1(1));
-        str2=unique(Steam(Glog))'; str2=string(str2);
+        str1=Files.Smatch(Glog);str1=string(str1(1)); % session string
+        str2=unique(Files.Steam(Glog))'; str2=string(str2);
         Einheit=strcat(str1,"_",str2(1),"_",str2(2));
         
         log=Files.G.MatchID==str2double(str1);
@@ -49,15 +49,15 @@ for aa=1:length(Files.Y)
             cd(Z{ab});
             N=dir('*.csv'); N={N.name};                 % N <- Dateien der Spieler
             data=readtable(N{1});           % Iport Funktion
-            data=convertdata(data,P.Source,P.SourceId);
+            data=convertdata(data,P);
             data=AddGpx(data);
             cd(GameF);
             
-            [DataStruct]=cutdatafromgame(dataG,data,P.SourceId,Nr); 
+            [DataStruct]=cutdatafromgame(dataG,data,P,Nr); 
             
         elseif P.SourceId==4      % Kinexxon
-            playerO=(Files.Splayer(Glog));
-            player=split(playerO(ab));
+            AllPlayer=(Files.Splayer(Glog));
+            player=split(AllPlayer(ab));
             player(cellfun('isempty',player)) = []; % remove empty cells from mm
             Vorname=player{1};
             Nachname=player{end};
@@ -65,12 +65,12 @@ for aa=1:length(Files.Y)
             Nr=Nr(ab);
             [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);
             data=readtable(Z{ab});
-            data=convertdata(data,varset,P.SourceId);
+            data=convertdata(data,P);
             
-            log=strtrim(string(playerO{ab}))==string(Gsub.Name);
+            log=strtrim(string(AllPlayer{ab}))==string(Gsub.Name);
             Gplayer=Gsub(log,:);
             
-            [DataStruct]=cutdatafromgame(Gplayer,data,P.SourceId,Nr); 
+            [DataStruct]=cutdatafromgame(Gplayer,data,P,Nr); 
             
         elseif P.SourceId==3          % Polar API
             Vorname=Z(ab).Vorname;
@@ -78,8 +78,8 @@ for aa=1:length(Files.Y)
             Nr=Z(ab).SpielerNr;
             [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);
             data=Z(ab).Daten;
-            data=convertdata(data,P.Source,P.SourceId);
-            [DataStruct]=cutdatafromgame(Z(ab),data,P.SourceId,Nr); 
+            data=convertdata(data,P);
+            [DataStruct]=cutdatafromgame(Z(ab),data,P,Nr); 
             
         end
         %% Calculation
@@ -93,7 +93,7 @@ for aa=1:length(Files.Y)
         for am=1:length(DataStruct)
             DataS=DataStruct(am);
             try
-                [Features, Vecs]=FeatureCalc(DataS,Str,P.Norm,S.Fields,P.Source.ts,pos);
+                [Features, Vecs]=FeatureCalc(DataS,Str,S,P,pos);
                 if am==1 && ab==1
                     Export=Features;
                     SprintExp=Vecs;
