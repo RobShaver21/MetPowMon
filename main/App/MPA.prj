@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="527711935" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="74175325" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>MPA</param.appname>
     <param.icon />
     <param.icons />
@@ -43,9 +43,7 @@
 	 
  Input Arguments 
 	 -?  print help on how to use the application 
-	 input arguments 
- Description 
- 	 https://github.com/RobShaver21/MetPowMon</param.help.text>
+	 input arguments</param.help.text>
     <unset>
       <param.icon />
       <param.icons />
@@ -85,8 +83,6 @@
     </fileset.resources>
     <fileset.package />
     <fileset.depfun>
-      <file>${PROJECT_ROOT}\APIapp.mlapp</file>
-      <file>${PROJECT_ROOT}\NewProfile.mlapp</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\auth.mat</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\client.mat</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\loadSettings.m</file>
