@@ -6,8 +6,7 @@ aa=1; ab=1;
 %% Schleife Games/Ordner
 
 for aa=1:length(Files.Y)
-    cd(P.Datafolder)
-    
+
     if P.SourceId==1              % Polar
         cd(P.Datafolder)
         dataG=readgamedata(Files.X,Files.Y,aa);
@@ -18,6 +17,7 @@ for aa=1:length(Files.Y)
         GameF=pwd;
         
     elseif P.SourceId==4          % Kinexxon
+        cd(P.Datafolder)
         Glog=Files.Smatch==str2double(Files.Y{aa});
         Z=Files.STR(Glog);                  % filter session
         GameF=P.Datafolder;
@@ -31,7 +31,7 @@ for aa=1:length(Files.Y)
     elseif P.SourceId==3          % Polar API
         cd(P.Datafolder)
         file=Files.Y{aa};
-        load(file)
+        Dout=load(file)
         Z=Dout;
         Einheit=extractBefore(file,'.mat');
      

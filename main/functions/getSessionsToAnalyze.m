@@ -10,6 +10,10 @@ if P.SourceId==1      % Polar Download
 elseif P.SourceId==4      % Kinexxon
     cd(P.Rootfolder);  
     Files.G=readtable('Phase.csv'); % read Table for cutting data
+    % 
+    %JB=readtable('Auszeiten Gesamt.xlsx')
+    %
+    
     cd(P.Datafolder);     
     
     STR=dir('*.csv'); STR={STR.name};

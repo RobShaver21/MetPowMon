@@ -3,7 +3,7 @@ function exportTables(Files,P)
 Datum=datestr(now,'dd.mm.yyyy_HHMM');
 
 cd(P.DB)
-
+P.DB
 %Files=dir('*.mat'); Files={Files.name};
 
 for e=1:length(Files)

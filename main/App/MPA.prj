@@ -15,7 +15,7 @@
     <param.guid />
     <param.installpath.string>\MPA\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
-    <param.logo />
+    <param.logo>C:\Users\Robin\Downloads\1024px-Lightning_Bolt_on_Circle.svg.png</param.logo>
     <param.install.notes />
     <param.target.install.notes />
     <param.intermediate>${PROJECT_ROOT}\MPA\for_testing</param.intermediate>
@@ -50,7 +50,6 @@
       <param.version />
       <param.guid />
       <param.installpath.combo />
-      <param.logo />
       <param.install.notes />
       <param.target.install.notes />
       <param.intermediate />
@@ -83,8 +82,8 @@
     </fileset.resources>
     <fileset.package />
     <fileset.depfun>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\auth.mat</file>
-      <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\client.mat</file>
+      <file>${PROJECT_ROOT}\APIapp.mlapp</file>
+      <file>${PROJECT_ROOT}\NewProfile.mlapp</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\loadSettings.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\Settings.mat</file>
     </fileset.depfun>
