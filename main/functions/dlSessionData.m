@@ -36,8 +36,7 @@ for a=1:length(AllSessions)
             %%  Extract sample-data
             sampleurl=[...
                 'https://teampro.api.polar.com/v1/training_sessions/' ...
-                player_session_id '/?samples=all'...
-                ];
+                player_session_id '/?samples=all'];
             sampleresponse=send(datarequest, sampleurl);
             %% Generate Output
 
@@ -70,6 +69,8 @@ for a=1:length(AllSessions)
                 Dout(ply).SpielerNr=players(index).player_number;
             else
                 Dout(ply).SpielerNr=player_id;
+                Dout(ply).Vorname=player_id;
+                Dout(ply).Nachname=player_id;
             end
             
             
@@ -101,14 +102,6 @@ end
 
 % save error log
 
-path=[char(DataF) '\error'];
-
-if ~isfolder(path)
-    mkdir(path)
-end
-
-errlabel=[path '\Err_' datestr(now,'yyyymmdd_HHMMSS') '.mat'];
-
-save(errlabel,'failure');
+errorLog(DataF, failure);
 
 end

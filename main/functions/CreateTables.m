@@ -68,12 +68,12 @@ log = arrayfun(@(x) find(string(refvarsT)==x,1,'first'),string(zvars));
 TeamMeanRef=RefC.TeamMean(:,log);
 TeamSdRef=RefC.TeamSD(:,log);
 
-log = arrayfun(@(x) find(string(TeamMeanRef.Phase)==x,1,'first'),...
-    string(MeanTeamZ.Phase));
+[id,log] = ismember(MeanTeamZ.Phase,TeamMeanRef.Phase);
+log(~id)=[];
 
-DiffTeam=MeanTeamZ;
-Zteam=MeanTeamZ;
-PercTeam=MeanTeamZ;
+DiffTeam=MeanTeamZ(id,:);
+Zteam=DiffTeam;
+PercTeam=DiffTeam;
 
 DiffTeam{:,((strnr-1):end)}=(DiffTeam{:,((strnr-1):end)}-TeamMeanRef{log,(strnr-1):end});
 Zteam{:,((strnr-1):end)}=(DiffTeam{:,((strnr-1):end)}./TeamSdRef{log,(strnr-1):end});

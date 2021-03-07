@@ -1,4 +1,4 @@
-function [Norm, pos,info]=newplayer(Nr,Norm,Vorname,Nachname,SourceId)
+function [Norm, pos]=newplayer(Nr,Norm,Vorname,Nachname,SourceId)
 
 %% Polar
 if SourceId==1
@@ -35,6 +35,14 @@ elseif SourceId==4
     
     %% Polar API
 elseif SourceId==3
+    % handling strings when there is no subject information
+    if ischar(Nr)
+        [id,idpos]=ismember(Nr,Norm.Vorname);
+        Nr=[];
+        Nr(id)=Norm.SpielerNr(idpos(id));
+        Nr(~id)=height(Norm)+100;
+    end
+    
     if sum(Nr==Norm.SpielerNr)==0            %Neuen Spieler hinzufügen
         l=height(Norm)+1;
         Norm.LfdNr(l)=l;

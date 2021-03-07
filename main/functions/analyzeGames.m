@@ -2,6 +2,7 @@ function P=analyzeGames(S,P,Files,Datum)
 
 Version='Beta';    %% Skriptversion
 aa=1; ab=1;
+failure = struct('msg', {},'Einheit',{},'Player',{});
 
 %% Schleife Games/Ordner
 
@@ -101,7 +102,10 @@ for aa=1:length(Files.Y)
                     Export=[Export;Features];
                     SprintExp=[SprintExp;Vecs];
                 end
-            catch
+            catch ME
+                failure(end+1).msg=getReport(ME);
+                failure(end).Einheit=Einheit;
+                failure(end).Player=ab;
             end
         end
         
@@ -112,18 +116,18 @@ for aa=1:length(Files.Y)
     end       % Spieler-Schleife
     
     %% clean & save data
+  
+    % save failure
+    errorLog(P.DB, failure);
     
+    % save data
     cd(P.DB);
     SaveStruct=struct(...
         'Einheit',Einheit,'Table',Export,...
         'VectorExport',SprintExp,'Datum',{Datum});
     save(strcat(Einheit, '.mat'),'SaveStruct');
     clear SaveStruct Export VecExp
-     
+    
     cd(P.Rootfolder)
     
 end       % Game-Schleife
-
-
-
-

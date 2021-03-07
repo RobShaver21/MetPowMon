@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="74175325" file="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
-    <param.appname>MPA</param.appname>
+  <configuration build-checksum="74175325" file="C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>MetabolicPowerApp</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
@@ -48,6 +48,8 @@
       <param.icon />
       <param.icons />
       <param.version />
+      <param.email />
+      <param.company />
       <param.guid />
       <param.installpath.combo />
       <param.install.notes />
@@ -82,22 +84,52 @@
     </fileset.resources>
     <fileset.package />
     <fileset.depfun>
-      <file>${PROJECT_ROOT}\APIapp.mlapp</file>
-      <file>${PROJECT_ROOT}\NewProfile.mlapp</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\loadSettings.m</file>
       <file>C:\Users\Robin\MATLAB Drive\MetPowMon\main\Settings.mat</file>
+      <file>${PROJECT_ROOT}\APIapp.mlapp</file>
+      <file>${PROJECT_ROOT}\NewProfile.mlapp</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\MPA\for_testing" name="MPA.exe" optional="false">C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\MPA.exe</file>
-      <file location="${PROJECT_ROOT}\MPA\for_testing" name="splash.png" optional="false">C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\MPA\for_testing" name="readme.txt" optional="true">C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\MPA\for_testing" name="readme.txt" optional="true">C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\MPA\for_testing" name="splash.png" optional="false">C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\MPA\for_testing" name="MetabolicPowerApp.exe" optional="false">C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App\MPA\for_testing\MetabolicPowerApp.exe</file>
     </build-deliverables>
     <workflow />
     <matlab>
       <root>C:\Program Files\MATLAB\R2020b</root>
       <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="gpucoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabhdlcoder" />
         <toolbox name="neuralnetwork" />
       </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <gpucoder>
+          <enabled>true</enabled>
+        </gpucoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
       <toolbox>
         <neuralnetwork>
           <enabled>true</enabled>
