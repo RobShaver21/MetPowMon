@@ -31,7 +31,7 @@ for aa=1:length(Files.Y)
     elseif P.SourceId==3          % Polar API
         cd(P.Datafolder)
         file=Files.Y{aa};
-        Dout=load(file)
+        load(file)
         Z=Dout;
         Einheit=extractBefore(file,'.mat');
      
@@ -94,7 +94,7 @@ for aa=1:length(Files.Y)
             DataS=DataStruct(am);
             try
                 [Features, Vecs]=FeatureCalc(DataS,Str,S,P,pos);
-                if am==1 && ab==1
+                if ~exist('Export','var')
                     Export=Features;
                     SprintExp=Vecs;
                 else

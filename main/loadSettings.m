@@ -9,3 +9,4 @@ if exist('ProfileId','var')==1
     P=addDataBase(P);
 end
 
+cd(baseF)
