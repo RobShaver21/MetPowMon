@@ -1,8 +1,8 @@
 function DataStruct=cutdatafromgame(dataG,data,P,Nr)
 
-
 SourceId=P.SourceId;
 fs=P.Source.ts;
+
 %% Polar
 if SourceId==1
     
@@ -99,8 +99,10 @@ elseif SourceId==3
         
     end
     
-    
-    
+    % clear empty struct fields
+    id=cellfun(@height,{DataStruct.Table})<=1;
+    DataStruct(id)=[];
+
     %% Kinexon
 elseif SourceId==4
     % dataG=Gplayer;      % remove later

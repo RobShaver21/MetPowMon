@@ -94,9 +94,10 @@ for a=1:length(AllSessions)
     end
     
     % save Output
-    
-    filename=[char(DataF) '\' datestr(datum,'yyyymmdd_HHMMSS'),'.mat'];
-    save (filename,'Dout');
+    if ~isempty(Dout.Daten)
+        filename=[char(DataF) '\' datestr(datum,'yyyymmdd_HHMMSS'),'.mat'];
+        save (filename,'Dout');
+    end
     
 end
 

@@ -12,7 +12,7 @@ if SourceId==1
         Norm.EC0(l)=nanmean(Norm.EC0);
         Norm.info(l)="Mittlelwerte des Teams";
     end
-
+    
     pos=find(Norm{:,2}==Nr);
     
     %% Kinexxon
@@ -36,14 +36,14 @@ elseif SourceId==4
     %% Polar API
 elseif SourceId==3
     % handling strings when there is no subject information
-    if ischar(Nr)
-        [id,idpos]=ismember(Nr,Norm.Vorname);
+     if ischar(Nr)
+        [id,pos]=ismember(Nr,Norm.Vorname);
         Nr=[];
-        Nr(id)=Norm.SpielerNr(idpos(id));
-        Nr(~id)=height(Norm)+100;
+        Nr(id)=Norm.SpielerNr(pos(id));
+        Nr(~id)=height(Norm)+100;  
     end
     
-    if sum(Nr==Norm.SpielerNr)==0            %Neuen Spieler hinzufügen
+    if sum(Nr==Norm.SpielerNr)==0        %Neuen Spieler hinzufügen
         l=height(Norm)+1;
         Norm.LfdNr(l)=l;
         Norm.SpielerNr(l)=Nr;
@@ -54,6 +54,7 @@ elseif SourceId==3
         Norm.EC0(l)=nanmean(Norm.EC0);
         Norm.info(l)="Mittlelwerte des Teams";
     end
-    pos=find(Norm{:,2}==Nr); 
+    
+    pos=find(Norm.SpielerNr==Nr);
 end
 

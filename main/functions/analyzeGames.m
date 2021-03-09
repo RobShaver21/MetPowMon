@@ -103,7 +103,7 @@ for aa=1:length(Files.Y)
                     SprintExp=[SprintExp;Vecs];
                 end
             catch ME
-                failure(end+1).msg=getReport(ME);
+                failure(end+1).msg=ME.message;
                 failure(end).Einheit=Einheit;
                 failure(end).Player=ab;
             end
