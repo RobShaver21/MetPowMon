@@ -30,7 +30,7 @@ if SourceId==1
     dur=diff(newtp,1,2);
     dur=datestr(dur,'HH:MM:SS');
     t1=datestr(newtp(:,1),'HH:MM:SS');
-    t2=datestr(tdur(:,2),'HH:MM:SS');
+    t2=datestr(newtp(:,2),'HH:MM:SS');
     dur=datestr(dur,'HH:MM:SS');
     
     for a=1:length(tp(:,1))
