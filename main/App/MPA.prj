@@ -11,11 +11,11 @@
 - Creates session reports /w reference
 - Handles csv's and can download data from Polar Team Pro via API</param.summary>
     <param.description>https://github.com/RobShaver21/MetPowMon</param.description>
-    <param.screenshot>C:\Users\Robin\Downloads\1024px-Lightning_Bolt_on_Circle.svg.png</param.screenshot>
+    <param.screenshot />
     <param.guid />
     <param.installpath.string>\MPA\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
-    <param.logo>C:\Users\Robin\Downloads\1024px-Lightning_Bolt_on_Circle.svg.png</param.logo>
+    <param.logo />
     <param.install.notes />
     <param.target.install.notes />
     <param.intermediate>${PROJECT_ROOT}\MPA\for_testing</param.intermediate>
@@ -48,10 +48,13 @@
       <param.icon />
       <param.icons />
       <param.version />
+      <param.authnamewatermark />
       <param.email />
       <param.company />
+      <param.screenshot />
       <param.guid />
       <param.installpath.combo />
+      <param.logo />
       <param.install.notes />
       <param.target.install.notes />
       <param.intermediate />
