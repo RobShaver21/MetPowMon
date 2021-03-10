@@ -94,7 +94,7 @@ for a=1:length(AllSessions)
     end
     
     % save Output
-    if ~isempty(Dout.Daten)
+    if ~isempty(Dout(1).Daten)
         filename=[char(DataF) '\' datestr(datum,'yyyymmdd_HHMMSS'),'.mat'];
         save (filename,'Dout');
     end

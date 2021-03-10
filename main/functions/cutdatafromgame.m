@@ -52,6 +52,7 @@ if SourceId==1
     
     %%
 elseif SourceId==3
+    % dataG=Z(ab)
     St=dataG.markers;
     St(end+1).start_time=dataG.Beginn;
     St(end).end_time=dataG.Ende;
@@ -65,10 +66,14 @@ elseif SourceId==3
     [y, m, d]=ymd(data.clock(1));
     clock=data.clock-datetime(y,m,d,0,0,0);
     data.clock=clock;
-    clock0=[clock; hours(24)];
+    clock0=[clock; hours(30)];
     
     tdur(isnan(tdur(:,2)),2)=max(tdur(:,2));
     tdur(isnan(tdur(:,1)),1)=min(tdur(:,1));
+    
+    % midnight
+    id=tdur(:,2)<tdur(:,1)
+    tdur(id,2)=tdur(id,2)+hours(24);
 
     tp=arrayfun(@(x) find(clock0>=x,1,'first'),tdur);
     tp(tp>numel(clock))=numel(clock);
@@ -158,8 +163,6 @@ elseif SourceId==4
     dur2=datestr(durT,'HH:MM:SS');
     durSum=minutes(sum(durT));
     %
-    
-    
     DataStruct(1).Phase="Brutto";
     DataStruct(1).Table=data;
     DataStruct(1).Dauer=height(data)*0.066 /60;

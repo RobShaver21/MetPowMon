@@ -1,12 +1,12 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="74175325" file="C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="1313915569" file="C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App\MPA.prj" location="C:\Users\schaertb\MATLAB Drive\MetPowMon\main\App" name="MPA" preferred-package-location="C:\Users\Robin\MATLAB Drive\MetPowMon\main\App\MPA\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>MetabolicPowerApp</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
     <param.authnamewatermark>Robin Schäfer</param.authnamewatermark>
     <param.email>robin.schaefer@rub.de</param.email>
-    <param.company>RUB, Lehrstuhl für Sportmed. und Sportern.</param.company>
+    <param.company>RUB</param.company>
     <param.summary>- Analyzes Polar and Kinexon data
 - Creates session reports /w reference
 - Handles csv's and can download data from Polar Team Pro via API</param.summary>
@@ -50,7 +50,6 @@
       <param.version />
       <param.authnamewatermark />
       <param.email />
-      <param.company />
       <param.screenshot />
       <param.guid />
       <param.installpath.combo />

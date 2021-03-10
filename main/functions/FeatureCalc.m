@@ -6,16 +6,17 @@ Norm=P.Norm;
 
 
 T=DataS.Table;
-T.t=DataS.Table.t;
-T.s=DataS.Table.s;
-T.v=DataS.Table.v;
-T.a=DataS.Table.a;
+% T.t=DataS.Table.t;
+% T.s=DataS.Table.s;
+% T.v=DataS.Table.v;
+% T.a=DataS.Table.a;
 dt=diff(T.t); dt(end+1)=dt(end);
 
 Beginn={DataS.Beginn};
 Ende={DataS.Ende};
 Dauer={DataS.Dauer};
 Phase={DataS.Phase};
+DauerMin=height(T)*ts/60;
 
 g=9.81;
 MPz=[0 .25 .50 1 1.75 2.75];
@@ -171,7 +172,7 @@ Features=table(LfdNr,Phase,Beginn, Ende, Dauer, ...
     ZeitVelHist,DistanzVelHist,ZeitAccHist, DistanzAccHist,...
     Sprints_a,Sprints_v,Sprints_MP,...
     PeakVel,PeakAccPos,PeakAccNeg,PeakMp,...
-    AvgVel,LoadMp,B1);
+    AvgVel,LoadMp,B1,DauerMin);
 
 
 Features=[Str Features];
