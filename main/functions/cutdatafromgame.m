@@ -199,7 +199,7 @@ elseif SourceId==4
         log=NetTable.Kin_Netto==1; log(1)=0;
         
         DataStruct(end).Table=vertcat(DataStruct(log).Table);
-        DataStruct(end).Dauer=durSum;
+        DataStruct(end).Dauer=height(DataStruct.Table)*0.066 /60;
         DataStruct(end).Beginn=t12(1,:);
         DataStruct(end).Ende=t22(end,:);
         DataStruct(end).Name=dataG.Name(1);
