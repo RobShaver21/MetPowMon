@@ -13,7 +13,7 @@ Datum=datestr(now,'dd.mm.yyyy_HHMM');
 Files=getSessionsToAnalyze(P);
 
 %% pick Sessions
-Sessions=[1];
+Sessions=[5];
 
 Files.Y=Files.Y(Sessions);
 

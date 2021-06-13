@@ -45,7 +45,7 @@ for aa=1:length(Files.Y)
         if P.SourceId==1      % Polar
             cd(GameF)
             [Nr,Vorname,Nachname]=extractFolderInfo(Z{ab});
-            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);       %info bearbeiten
+            [P.Norm, pos]=newplayer(P,Nr,Vorname,Nachname);       %info bearbeiten
 
             cd(Z{ab});
             N=dir('*.csv'); N={N.name};                 % N <- Dateien der Spieler
@@ -64,7 +64,7 @@ for aa=1:length(Files.Y)
             Nachname=player{end};
             Nr=Files.Snumber(Glog);
             Nr=Nr(ab);
-            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);
+            [P.Norm, pos]=newplayer(P,Nr,Vorname,Nachname);
             data=readtable(Z{ab});
             data=convertdata(data,P);
             
@@ -77,7 +77,7 @@ for aa=1:length(Files.Y)
             Vorname=Z(ab).Vorname;
             Nachname=Z(ab).Nachname;
             Nr=Z(ab).SpielerNr;
-            [P.Norm, pos]=newplayer(Nr,P.Norm,Vorname,Nachname,P.SourceId);
+            [P.Norm, pos]=newplayer(P,Nr,Vorname,Nachname);
             data=Z(ab).Daten;
             data=convertdata(data,P);
             [DataStruct]=cutdatafromgame(Z(ab),data,P,Nr); 

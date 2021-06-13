@@ -58,6 +58,7 @@ elseif SourceId==3
     St(end).end_time=dataG.Ende;
     tdur=string([{St.start_time}; {St.end_time}]);
     tdur=datetime(tdur,'InputFormat', 'uuuu-MM-dd''T''HH:mm:ss');
+    
     Ges=[data.clock(1);data.clock(end)];
     tdur=[tdur Ges];
     [y, m, d]= ymd(tdur);
@@ -66,13 +67,13 @@ elseif SourceId==3
     [y, m, d]=ymd(data.clock(1));
     clock=data.clock-datetime(y,m,d,0,0,0);
     data.clock=clock;
-    clock0=[clock; hours(30)];
+    clock0=[clock; hours(49)];
     
     tdur(isnan(tdur(:,2)),2)=max(tdur(:,2));
-    tdur(isnan(tdur(:,1)),1)=min(tdur(:,1));
+    tdur(isnan(tdur(:,1)),1)=min(tdur(:,1))
     
     % midnight
-    id=tdur(:,2)<tdur(:,1)
+    id=tdur(:,2)<tdur(:,1);
     tdur(id,2)=tdur(id,2)+hours(24);
 
     tp=arrayfun(@(x) find(clock0>=x,1,'first'),tdur);
@@ -127,9 +128,8 @@ elseif SourceId==4
         Empty=dataG(1,:);
     end
     
-    %     dataG(log,:)=[];      % select netto only
-    
-    %
+    dataG(log,:)=[];      % select netto only
+
     clock=string(datestr(data.clock));                    % t-Vec from data
     clock=split(clock);
     clock=duration(clock(:,2));              % convert to duration array
@@ -147,7 +147,7 @@ elseif SourceId==4
     tdur(log,:)=[];
      
     tp = arrayfun(@(x) find(clock>=x,1,'first'),tdur);
-
+    
     dur=tdur(:,2)-tdur(:,1);                % dataG
     Add(log,:)=[];
     check=sum(seconds([dur-Add])>1);
@@ -156,29 +156,30 @@ elseif SourceId==4
     t2=datestr(tdur(:,2),'HH:MM:SS');
     dur=datestr(dur,'HH:MM:SS');
     
-    tdur2=clock(tp);                        % corresponding values from data
-    durT=tdur2(:,2)-tdur2(:,1);
-    t12=datestr(tdur2(:,1),'HH:MM:SS');
-    t22=datestr(tdur2(:,2),'HH:MM:SS');
+    % corresponding values from data
+    durT=clock(tp(:,2))-clock(tp(:,1));
+    t12=datestr(clock(tp(:,1)),'HH:MM:SS');
+    t22=datestr(clock(tp(:,2)),'HH:MM:SS');
     dur2=datestr(durT,'HH:MM:SS');
     durSum=minutes(sum(durT));
     %
     DataStruct(1).Phase="Brutto";
     DataStruct(1).Table=data;
-    DataStruct(1).Dauer=height(data)*0.066 /60;
+    DataStruct(1).Dauer=height(data)*0.066/60;
     DataStruct(1).Beginn=datestr(clock(1),'HH:MM:SS');
     DataStruct(1).Ende=datestr(clock(end),'HH:MM:SS');
     DataStruct(1).Name=Name;
     DataStruct(1).Einheit=Einheit;
-    
     DataStruct(1).AddDataRows=Empty;       % add dummy data from phase 1
     DataStruct(1).AddDataRows.Properties.VariableNames=NewName;
+    
+    
     
     
     for a=1:length(tp(:,1))
         DataStruct(a+1).Phase=dataG.PhaseId(a);
         DataStruct(a+1).Table=data(tp(a,1):tp(a,2),:);
-        DataStruct(a+1).Dauer=minutes(durT(a,:));
+        DataStruct(a+1).Dauer=height(DataStruct(a+1).Table)*0.066 /60;
         DataStruct(a+1).Beginn=t12(a,:);
         DataStruct(a+1).Ende=t22(a,:);
         DataStruct(a+1).Name=dataG.Name(a);
@@ -190,7 +191,7 @@ elseif SourceId==4
         
     end
     
-    %try
+    try
         DataStruct(end+1).Phase="Netto";
         DataStruct(end).AddDataRows=Empty;       % add dummy data from phase 1
         DataStruct(end).AddDataRows.Properties.VariableNames=NewName;
@@ -199,14 +200,14 @@ elseif SourceId==4
         log=NetTable.Kin_Netto==1; log(1)=0;
         
         DataStruct(end).Table=vertcat(DataStruct(log).Table);
-        DataStruct(end).Dauer=height(DataStruct.Table)*0.066 /60;
+        DataStruct(end).Dauer=height(DataStruct(end).Table)*0.066 /60;
         DataStruct(end).Beginn=t12(1,:);
         DataStruct(end).Ende=t22(end,:);
         DataStruct(end).Name=dataG.Name(1);
         DataStruct(end).Einheit=dataG.MatchID(1);
         
         
-    %catch end
+    catch end
     
     
     

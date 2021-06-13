@@ -20,10 +20,10 @@ DauerMin=height(T)*ts/60;
 
 g=9.81;
 MPz=[0 .25 .50 1 1.75 2.75];
- vZ=[0 7 11 15 19]./3.6;       % alt
- aZ=[-10 -3 -2 -1 0 1 2 3];      % alt
-% vZ=[0 0.1 2 4 5.4 6.9];         % men EHF
-% aZ=[-10 -4 -3 -2 -1 0 1 2 3 4]; % men EHF
+ %vZ=[0 7 11 15 19]./3.6;       % alt
+ %aZ=[-10 -3 -2 -1 0 1 2 3];      % alt
+ vZ=[0 0.1 2 4 5.4 6.9];         % men EHF
+ aZ=[-10 -4 -3 -2 -1 0 1 2 3 4]; % men EHF
 
 
 MP4=Norm.MP4(pos);                          
@@ -161,8 +161,8 @@ cTRIMPind=cTRIMP(HR,60,ts,HRrest,HRmax,aind,bind);
 PeakHf=max(HR);
 IntExt=cTRIMPind/EEjkg;
 
-
 HfFeatures=table(ZeitHfHist,AvgHf,PeakHf,SHRZ,TRIMP,cTRIMPgen,cTRIMPind,IntExt);
+
 catch end
 %% Export
 
