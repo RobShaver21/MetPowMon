@@ -1,5 +1,5 @@
-%baseF= 'C:\Users\Robin\MATLAB Drive\MetPowMon\main';
-baseF=fileparts(which('loadSettings.m'));
+baseF= 'C:\Users\robin\MATLAB Drive\MetPowMon\main';
+%baseF=fileparts(which('loadSettings.m'));
 cd(baseF)
 addpath(genpath(pwd));
 load Settings.mat;

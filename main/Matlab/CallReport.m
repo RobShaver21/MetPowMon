@@ -2,17 +2,18 @@ clearvars; close all; clc;
 
 %% Settings
 % 1=VFL 2=Hockey 3=EHF 4=HoNaMa 5=API_HoNaMa 6=API_Dana 7=API_DanaU21 8=API_eagle
+% 5=Home_Hona 15=Home_Dana
 ProfileId=5;
 loadSettings()
 
-mode=1;         % 1: Game , 2: Training
+mode=2;         % 1: Game , 2: Training
 
 Ref=S.Profile(ProfileId).Ref(2);
 
 allNames=getAnalyzedSessions(P.Rootfolder);
 
 %% pick Session
-pick=8;
+pick=316:318;
 allNames=allNames(pick);
 Session=1;
 
