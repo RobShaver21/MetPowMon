@@ -34,7 +34,7 @@ elseif SourceId==4
     
     
     %% Polar API
-elseif SourceId==3
+elseif SourceId==3 
     % handling strings when there is no subject information
      if ischar(Nr)
         [id,pos]=ismember(Nr,Norm.Vorname);

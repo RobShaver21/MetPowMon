@@ -8,15 +8,17 @@ load client.mat       % load client id & secret
 auth=['Basic ' matlab.net.base64encode([client.id ':' client.secret])];
 method='POST';
 Content_Type='application/x-www-form-urlencoded';
+uri = matlab.net.URI('https://auth.polar.com/oauth/token');
 header=matlab.net.http.HeaderField(...
         'Authorization',auth,...
         'Content-Type',Content_Type);
-    
+
+
 % Checks if refresh_token was issued for refresh_token-flow -> no code needed
 if exist('refresh_token','var')==1
     data = ['grant_type=refresh_token&refresh_token=', refresh_token];
     request = matlab.net.http.RequestMessage(method,header,data);
-    uri = matlab.net.URI('https://auth.polar.com/oauth/token');
+    
     response=send(request,uri);
 end
   

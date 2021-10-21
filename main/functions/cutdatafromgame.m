@@ -70,7 +70,7 @@ elseif SourceId==3
     clock0=[clock; hours(49)];
     
     tdur(isnan(tdur(:,2)),2)=max(tdur(:,2));
-    tdur(isnan(tdur(:,1)),1)=min(tdur(:,1))
+    tdur(isnan(tdur(:,1)),1)=min(tdur(:,1));
     
     % midnight
     id=tdur(:,2)<tdur(:,1);

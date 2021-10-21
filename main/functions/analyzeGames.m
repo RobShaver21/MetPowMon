@@ -77,6 +77,9 @@ for aa=1:length(Files.Y)
             Vorname=Z(ab).Vorname;
             Nachname=Z(ab).Nachname;
             Nr=Z(ab).SpielerNr;
+            if isempty(Nr) 
+                continue 
+            end
             [P.Norm, pos]=newplayer(P,Nr,Vorname,Nachname);
             data=Z(ab).Daten;
             data=convertdata(data,P);
