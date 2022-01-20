@@ -25,15 +25,19 @@ The desktop app can be easily installed via the web installer (.exe) in `MetPowM
 - you can filter already analyzed data
 - select the desired sessions and click `Analyze`
 - data will be saved in `Rootfolder\DataBase`
-### create a reference
-- select sessions in the 'Analyzed Data' panel
-- click 'Create Reference'
-- enter a name
-- the reference panel on the right will update
+### add individual information
+- insert players and values in the lower table
+- new players will be added automatically with team mean values 
+- you can export, edit in excel and then re-import the table
 ### export summary table
 - select sessions in the 'Analyzed Data' panel
 - click 'Export Tables'
 - A table will be saved in `Rootfolder\Export`
+### create a reference for the report
+- select sessions in the 'Analyzed Data' panel
+- click 'Create Reference'
+- enter a name
+- the reference panel on the right will update
 ### create a report (in progress)
 - select sessions in the 'Analyzed Data' panel
 - select 'TRAINING' or 'GAME'
